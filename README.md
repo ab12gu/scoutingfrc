@@ -2,15 +2,28 @@
 
 Scouting app for frc
 
-Domain Address: [https://scout.blue](https://scout.blue)
+Domain Address: [scoutingfrc.com](https://www.scoutingfrc.com)
 
-# Installation
+## Requirements
+
+Defined by Gavin
+
+1. Balls scored
+2. Rough percentage made
+3. Climb
+4. Auto path
+5. Trench y n
+6. Pick up spot?
+7. Shoot on move
+8. Storage capacity
+
+## Installation
 
 1. Clone the repo locally:
 
 ```
-git clone https://github.com/ab12gu/frc-scouting-app
-cd frc-scouting-app
+git clone https://github.com/ab12gu/scoutingfrc
+cd scoutingfrc
 ```
 
 2. Install project dependencies
@@ -23,7 +36,7 @@ pip install -r requirements.txt
 source ./.venv/bin/activate
 ```
 
-# Deploy
+## Deploy
 
 Local deploy, run:
 ```
@@ -35,7 +48,7 @@ Ensure you are keeping the requirements.txt most up-to-date:
 pip freeze > requirements.txt
 ```
 
-# Architecture
+## Architecture
 
 Languages:
 - Frontend: `HTML/CSS`
