@@ -19,33 +19,35 @@ Defined by Gavin
 
 ## Installation
 
+Used to use `pip` as package manager, moved to `uv` <br>
+[docs.astral.sh/uv/guides/migration/pip-to-project/#migrating-to-a-uv-project](https://docs.astral.sh/uv/guides/migration/pip-to-project/#migrating-to-a-uv-project) <br>
+[notes.abgup.com/software/package-managers/python/](https://notes.abgup.com/software/package-managers/python/)
+
 1. Clone the repo locally:
-
-```
-git clone https://github.com/ab12gu/scoutingfrc
-cd scoutingfrc
-```
-
-2. Install project dependencies
-```
-pip install -r requirements.txt
+```bash
+$ git clone https://github.com/ab12gu/scoutingfrc
+$ cd scoutingfrc
 ```
 
-3. Start virtual environment
+2. Activate virtual env
+```bash
+# Unix
+$ source .venv/bin/activate
+
+# Windows via Powershell
+$ .venv/Scripts/activate.ps1
 ```
-source ./.venv/bin/activate
+
+3. Install project dependencies
+```bash
+$ uv sync
 ```
 
 ## Deploy
 
 Local deploy, run:
 ```
-python manage.py runserver
-```
-
-Ensure you are keeping the requirements.txt most up-to-date:
-```
-pip freeze > requirements.txt
+$ python manage.py runserver
 ```
 
 ## Architecture
