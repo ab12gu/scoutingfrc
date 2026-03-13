@@ -47,7 +47,7 @@ $ uv sync
 
 Local deploy, run:
 ```
-$ python manage.py runserver
+$ python manage.py runserver <port number>
 ```
 
 ## Architecture
