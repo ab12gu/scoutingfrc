@@ -13,5 +13,6 @@ dependencies = [
     "postgres==4.0",
     "psycopg==3.2.6",
     "psycopg2-pool==1.2",
+    "python-dotenv>=1.2.2",
     "sqlparse==0.5.3",
 ]
