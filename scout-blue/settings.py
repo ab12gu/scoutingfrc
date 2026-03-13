@@ -57,8 +57,8 @@ ROOT_URLCONF = 'scout-blue.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
