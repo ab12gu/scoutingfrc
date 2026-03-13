@@ -21,6 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+from dotenv import load_dotenv
+load_dotenv()
+
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -74,15 +77,23 @@ WSGI_APPLICATION = 'scout-blue.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+import dj_database_url
+import os
+
 DATABASES = {
-    'default': {
-        'ENGINE': "django.db.backends.postgresql",
-        'OPTIONS': {
-            'service': 'my_service',
-            'passfile': '.my_pgpass'
-        },
-    }
+    "default": dj_database_url.config(
+        default="postgresql://localhost:5432/mydb"
+    )
 }
+# DATABASES = {
+#    'default': {
+#        'ENGINE': "django.db.backends.postgresql",
+#        'OPTIONS': {
+#            'service': 'my_service',
+#            'passfile': '.my_pgpass'
+#        },
+#    }
+#}
 
 
 #    'default': {
