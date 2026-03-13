@@ -15,4 +15,5 @@ dependencies = [
     "psycopg2-pool==1.2",
     "python-dotenv>=1.2.2",
     "sqlparse==0.5.3",
+    "whitenoise>=6.12.0",
 ]
