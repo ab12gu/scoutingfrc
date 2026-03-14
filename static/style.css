@@ -87,6 +87,33 @@ body {
   box-shadow: 0 0 0 2px rgba(0, 87, 184, 0.2);
 }
 
+.poll-input {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text);
+  width: 70px;
+  text-align: center;
+}
+
+.poll-input::-webkit-outer-spin-button,
+.poll-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.poll-input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.poll-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(0, 87, 184, 0.2);
+}
+
 main {
   max-width: 720px;
   margin: 0 auto 2rem auto;
@@ -258,6 +285,7 @@ button.toggle-option[data-value="false"].active {
 .climb-buttons button {
   flex: 1;
   min-width: 0;
+  text-align: center;
 }
 
 @media (max-width: 640px) {
@@ -346,6 +374,37 @@ button.toggle-option[data-value="false"].active {
   main {
     margin-top: 1.5rem;
   }
+}
+
+.notes-section {
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.notes-section label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.notes-section textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text);
+  resize: vertical;
+  min-height: 100px;
+}
+
+.notes-section textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(0, 87, 184, 0.2);
 }
 
 .submit-section {

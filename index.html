@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FRC Scouting</title>
-    <link rel="stylesheet" href="/static/style.css?v=13" />
+    <link rel="stylesheet" href="/static/style.css?v=20">
     <link rel="icon" type="image/x-icon" href="/static/images/scout-blue-skyblue.png">
   </head>
 
@@ -17,6 +17,10 @@
       </header>
 
       <div class="match-info">
+        <div class="input-row">
+          <label for="your-name">Your Name:</label>
+          <input type="text" id="your-name" placeholder="e.g. John">
+        </div>
         <div class="input-row">
           <label for="team-number">Team Number:</label>
           <input type="text" id="team-number" placeholder="e.g. 1234">
@@ -31,7 +35,7 @@
         <div class="poll-row">
           <span class="poll-label">Balls scored in auto</span>
           <button type="button" class="decrement" data-key="autoScore">-</button>
-          <span class="poll-value" id="autoScore">0</span>
+          <input type="number" class="poll-input" id="autoScore-input" data-key="autoScore" value="0" min="0">
           <button type="button" class="increment" data-key="autoScore">+</button>
         </div>
 
@@ -41,7 +45,7 @@
             <button type="button" class="autoClimb-option" data-value="1">1</button>
             <button type="button" class="autoClimb-option" data-value="2">2</button>
             <button type="button" class="autoClimb-option" data-value="3">3</button>
-            <button type="button" class="autoClimb-option" data-value="L">L</button>
+            <button type="button" class="autoClimb-option" data-value="Park">P</button>
             <button type="button" class="autoClimb-option" data-value="No">No</button>
           </div>
           <span class="poll-value" id="autoClimb">No</span>
@@ -50,7 +54,7 @@
         <div class="poll-row">
           <span class="poll-label">Balls scored in teleop</span>
           <button type="button" class="decrement" data-key="balls">-</button>
-          <span class="poll-value" id="balls">0</span>
+          <input type="number" class="poll-input" id="balls-input" data-key="balls" value="0" min="0">
           <button type="button" class="increment" data-key="balls">+</button>
         </div>
 
@@ -67,7 +71,7 @@
             <button type="button" class="climb-option" data-value="1">1</button>
             <button type="button" class="climb-option" data-value="2">2</button>
             <button type="button" class="climb-option" data-value="3">3</button>
-            <button type="button" class="climb-option" data-value="L">L</button>
+            <button type="button" class="climb-option" data-value="Park">P</button>
             <button type="button" class="climb-option" data-value="No">No</button>
           </div>
           <span class="poll-value" id="climb">No</span>
@@ -113,6 +117,11 @@
         </div>
       </div>
 
+      <div class="notes-section">
+        <label for="notes">Additional notes:</label>
+        <textarea id="notes" placeholder="Add any additional notes about the robot's performance"></textarea>
+      </div>
+
       <div class="submit-section">
         <button type="button" id="submit-btn">Submit Data</button>
       </div>
@@ -120,6 +129,7 @@
 
     <script>
       const state = {
+        name: '',
         teamNumber: '',
         matchNumber: '',
         autoScore: 0,
@@ -132,10 +142,12 @@
         pickupHuman: false,
         shoot: false,
         storage: 0,
+        notes: '',
       };
 
       function updateDisplay(key) {
         const el = document.getElementById(key);
+        const input = document.getElementById(key + '-input');
         const value = state[key];
         if (typeof value === 'boolean') {
           if (el) {
@@ -149,6 +161,9 @@
         } else {
           if (el) {
             el.textContent = value;
+          }
+          if (input) {
+            input.value = value;
           }
         }
         // Update climb button styles
@@ -172,12 +187,35 @@
         return Math.max(0, value);
       }
 
+      document.getElementById('your-name').addEventListener('input', (e) => {
+        state.name = e.target.value;
+      });
+
       document.getElementById('team-number').addEventListener('input', (e) => {
         state.teamNumber = e.target.value;
       });
 
       document.getElementById('match-number').addEventListener('input', (e) => {
         state.matchNumber = e.target.value;
+      });
+
+      document.getElementById('notes').addEventListener('input', (e) => {
+        state.notes = e.target.value;
+      });
+
+      document.querySelectorAll('.poll-input').forEach(input => {
+        input.addEventListener('change', (e) => {
+          const key = e.target.dataset.key;
+          const value = parseInt(e.target.value) || 0;
+          state[key] = Math.max(0, value);
+          updateDisplay(key);
+        });
+        input.addEventListener('input', (e) => {
+          const key = e.target.dataset.key;
+          const value = parseInt(e.target.value) || 0;
+          state[key] = Math.max(0, value);
+          updateDisplay(key);
+        });
       });
 
       document.addEventListener('change', (event) => {
@@ -237,6 +275,7 @@
         .then(() => {
           alert("Data submitted successfully!");
           // Reset all parameters
+          state.name = '';
           state.teamNumber = '';
           state.matchNumber = '';
           state.autoScore = 0;
@@ -249,9 +288,12 @@
           state.pickupHuman = false;
           state.shoot = false;
           state.storage = 0;
+          state.notes = '';
           // Update inputs
+          document.getElementById('your-name').value = '';
           document.getElementById('team-number').value = '';
           document.getElementById('match-number').value = '';
+          document.getElementById('notes').value = '';
           // Update displays
           updateDisplay('autoScore');
           updateDisplay('autoClimb');
