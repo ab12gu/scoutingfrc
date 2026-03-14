@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FRC Scouting</title>
-    <link rel="stylesheet" href="/static/style.css?v=47">
+    <link rel="stylesheet" href="/static/style.css?v=48">
     <link rel="icon" type="image/x-icon" href="/static/images/scout-blue-skyblue.png">
   </head>
 
@@ -223,11 +223,16 @@
           }
           // Update toggle option button styles
           document.querySelectorAll(`.toggle-option[data-key="${key}"]`).forEach(btn => {
+            btn.classList.remove('active');
             if (value === 'N/A') {
-              btn.classList.toggle('active', btn.dataset.value === 'N/A');
+              if (btn.dataset.value === 'N/A') {
+                btn.classList.add('active');
+              }
             } else {
               const btnValue = btn.dataset.value === 'true';
-              btn.classList.toggle('active', btnValue === value);
+              if (btnValue === value) {
+                btn.classList.add('active');
+              }
             }
           });
         } else {
@@ -421,12 +426,6 @@
         }
 
         // Check selection fields
-        if (state.autoBallsScore === 'N/A') {
-          errors.push('Approx. Auto Balls Scored must be selected');
-        }
-        if (state.telepopBallsScore === 'N/A') {
-          errors.push('Approx. Teleop Balls Scored must be selected');
-        }
         if (state.approxStorage === '0') {
           errors.push('Storage capacity must be selected');
         }
@@ -444,15 +443,25 @@
 
         const scriptUrl = 'https://script.google.com/macros/s/AKfycbwELMK6enk3vwtbK0QfrG1EHVJ-N1YTmXW5fXCGzAkfzX_c_IQ107APv3nvwxNcc5Pc/exec';
         
-        // Convert boolean values to Yes/No strings for sheets compatibility
+        // Build submission object in UI order
         const dataToSubmit = {
-          ...state,
+          name: state.name,
+          teamNumber: state.teamNumber,
+          matchNumber: state.matchNumber,
+          robotOnField: state.robotOnField === 'N/A' ? 'N/A' : (state.robotOnField ? 'Yes' : 'No'),
+          robotStartSide: state.robotStartSide,
+          autoBallsScore: state.autoBallsScore,
+          autoClimb: state.autoClimb,
+          telepopBallsScore: state.telepopBallsScore,
+          trenchUnder: state.trenchUnder === 'N/A' ? 'N/A' : (state.trenchUnder ? 'Yes' : 'No'),
+          approxMissedPercentage: state.approxMissedPercentage,
+          climb: state.climb,
           trench: state.trench === 'N/A' ? 'N/A' : (state.trench ? 'Yes' : 'No'),
           pickupFloor: state.pickupFloor === 'N/A' ? 'N/A' : (state.pickupFloor ? 'Yes' : 'No'),
           pickupHuman: state.pickupHuman === 'N/A' ? 'N/A' : (state.pickupHuman ? 'Yes' : 'No'),
           shoot: state.shoot === 'N/A' ? 'N/A' : (state.shoot ? 'Yes' : 'No'),
-          trenchUnder: state.trenchUnder === 'N/A' ? 'N/A' : (state.trenchUnder ? 'Yes' : 'No'),
-          robotOnField: state.robotOnField === 'N/A' ? 'N/A' : (state.robotOnField ? 'Yes' : 'No')
+          approxStorage: state.approxStorage,
+          notes: state.notes
         };
         
         fetch(scriptUrl, {
@@ -503,6 +512,10 @@
           updateDisplay('pickupHuman');
           updateDisplay('shoot');
           updateDisplay('approxStorage');
+          // Clear all button active states
+          document.querySelectorAll('button').forEach(btn => {
+            btn.classList.remove('active');
+          });
         })
         .catch(error => {
           alert("Error submitting: " + error);
