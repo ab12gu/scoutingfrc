@@ -297,6 +297,21 @@ button.robot-start-option.active {
   border-color: var(--frc-blue);
 }
 
+button.robot-start-option[data-value="R1"],
+button.robot-start-option[data-value="R2"],
+button.robot-start-option[data-value="R3"] {
+  border-color: rgba(237, 27, 36, 0.35);
+  color: var(--frc-red);
+}
+
+button.robot-start-option[data-value="R1"].active,
+button.robot-start-option[data-value="R2"].active,
+button.robot-start-option[data-value="R3"].active {
+  background: var(--frc-red);
+  color: white;
+  border-color: var(--frc-red);
+}
+
 button.score-range-option-auto,
 button.score-range-option-teleop,
 button.approx-storage-option {
