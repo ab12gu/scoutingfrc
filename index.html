@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FRC Scouting</title>
-    <link rel="stylesheet" href="/static/style.css?v=26">
+    <link rel="stylesheet" href="/static/style.css?v=28">
     <link rel="icon" type="image/x-icon" href="/static/images/scout-blue-skyblue.png">
   </head>
 
@@ -143,6 +143,20 @@
           <input type="number" class="poll-input" id="storage-input" data-key="storage" value="0" min="0">
           <button type="button" class="increment" data-key="storage">+</button>
         </div>
+
+        <div class="poll-row climb-row">
+          <span class="poll-label">Approx storage capacity</span>
+          <div class="climb-buttons">
+            <button type="button" class="approx-storage-option" data-value="0">0</button>
+            <button type="button" class="approx-storage-option" data-value="5">5</button>
+            <button type="button" class="approx-storage-option" data-value="10">10</button>
+            <button type="button" class="approx-storage-option" data-value="20">20</button>
+            <button type="button" class="approx-storage-option" data-value="30">30</button>
+            <button type="button" class="approx-storage-option" data-value="40">40</button>
+            <button type="button" class="approx-storage-option" data-value="50+">50+</button>
+          </div>
+          <span class="poll-value" id="approxStorage">0</span>
+        </div>
       </div>
 
       <div class="notes-section">
@@ -172,6 +186,7 @@
         pickupHuman: false,
         shoot: false,
         storage: 0,
+        approxStorage: '0',
         notes: '',
       };
 
@@ -220,6 +235,15 @@
         // Update teleop balls score range button styles
         if (key === 'telepopBallsScore') {
           document.querySelectorAll('.score-range-option-teleop').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.value === value);
+          });
+          if (el) {
+            el.textContent = value;
+          }
+        }
+        // Update approx storage option button styles
+        if (key === 'approxStorage') {
+          document.querySelectorAll('.approx-storage-option').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.value === value);
           });
           if (el) {
@@ -311,6 +335,12 @@
           return;
         }
 
+        if (button.classList.contains('approx-storage-option')) {
+          state.approxStorage = button.dataset.value;
+          updateDisplay('approxStorage');
+          return;
+        }
+
         const key = button.dataset.key;
         if (!key) return;
 
@@ -360,6 +390,7 @@
           state.pickupHuman = false;
           state.shoot = false;
           state.storage = 0;
+          state.approxStorage = '0';
           state.notes = '';
           // Update inputs
           document.getElementById('your-name').value = '';
@@ -379,6 +410,7 @@
           updateDisplay('pickupHuman');
           updateDisplay('shoot');
           updateDisplay('storage');
+          updateDisplay('approxStorage');
         })
         .catch(error => {
           alert("Error submitting: " + error);

@@ -249,16 +249,33 @@ button.autoClimb-option[data-value="No"].active {
 }
 
 button.score-range-option-auto,
-button.score-range-option-teleop {
+button.score-range-option-teleop,
+button.approx-storage-option {
   border-color: rgba(0, 87, 184, 0.35);
   color: var(--frc-blue);
 }
 
+button.score-range-option-auto[data-value="0"],
+button.score-range-option-teleop[data-value="0"],
+button.approx-storage-option[data-value="0"] {
+  border-color: rgba(237, 27, 36, 0.35);
+  color: var(--frc-red);
+}
+
 button.score-range-option-auto.active,
-button.score-range-option-teleop.active {
+button.score-range-option-teleop.active,
+button.approx-storage-option.active {
   background: var(--frc-blue);
   color: white;
   border-color: var(--frc-blue);
+}
+
+button.score-range-option-auto[data-value="0"].active,
+button.score-range-option-teleop[data-value="0"].active,
+button.approx-storage-option[data-value="0"].active {
+  background: var(--frc-red);
+  color: white;
+  border-color: var(--frc-red);
 }
 
 input.toggle-checkbox {
