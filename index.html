@@ -57,6 +57,7 @@
         <div class="poll-row climb-row">
           <span class="poll-label">Auto Balls Scored <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
+            <button type="button" class="score-range-option-auto" data-value="0">0</button>
             <button type="button" class="score-range-option-auto" data-value="1-10">1-10</button>
             <button type="button" class="score-range-option-auto" data-value="10-25">10-25</button>
             <button type="button" class="score-range-option-auto" data-value="25-40">25-40</button>
@@ -80,6 +81,7 @@
         <div class="poll-row climb-row">
           <span class="poll-label">Teleop Balls Scored <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
+            <button type="button" class="score-range-option-teleop" data-value="0">0</button>
             <button type="button" class="score-range-option-teleop" data-value="1-25">1-25</button>
             <button type="button" class="score-range-option-teleop" data-value="25-50">25-50</button>
             <button type="button" class="score-range-option-teleop" data-value="50-75">50-75</button>
@@ -94,6 +96,7 @@
         <div class="poll-row climb-row">
           <span class="poll-label">Balls missed <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
+            <button type="button" class="missed-percentage-option" data-value="0">0</button>
             <button type="button" class="missed-percentage-option" data-value="1-25">1-25</button>
             <button type="button" class="missed-percentage-option" data-value="25-50">25-50</button>
             <button type="button" class="missed-percentage-option" data-value="50-75">50-75</button>
@@ -336,6 +339,33 @@
           }
           state[key] = value;
           updateDisplay(key);
+          
+          // If robot is not on field, auto-select N/A for all options
+          if (key === 'robotOnField' && value === false) {
+            state.robotStartSide = 'N/A';
+            state.autoBallsScore = 'N/A';
+            state.autoClimb = 'N/A';
+            state.telepopBallsScore = 'N/A';
+            state.approxMissedPercentage = 'N/A';
+            state.climb = 'N/A';
+            state.trench = 'N/A';
+            state.pickupFloor = 'N/A';
+            state.pickupHuman = 'N/A';
+            state.shoot = 'N/A';
+            state.approxStorage = 'N/A';
+            
+            updateDisplay('robotStartSide');
+            updateDisplay('autoBallsScore');
+            updateDisplay('autoClimb');
+            updateDisplay('telepopBallsScore');
+            updateDisplay('approxMissedPercentage');
+            updateDisplay('climb');
+            updateDisplay('trench');
+            updateDisplay('pickupFloor');
+            updateDisplay('pickupHuman');
+            updateDisplay('shoot');
+            updateDisplay('approxStorage');
+          }
           return;
         }
 
