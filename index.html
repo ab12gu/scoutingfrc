@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FRC Scouting</title>
-    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/style.css?v=12" />
     <link rel="icon" type="image/x-icon" href="/static/images/scout-blue-skyblue.png">
   </head>
 
@@ -29,55 +29,80 @@
 
       <div class="poll">
         <div class="poll-row">
-          <span class="poll-label">Balls scored</span>
+          <span class="poll-label">Balls scored in auto</span>
+          <button type="button" class="decrement" data-key="autoScore">-</button>
+          <span class="poll-value" id="autoScore">0</span>
+          <button type="button" class="increment" data-key="autoScore">+</button>
+        </div>
+
+        <div class="poll-row climb-row">
+          <span class="poll-label">Auto climb</span>
+          <div class="climb-buttons">
+            <button type="button" class="autoClimb-option" data-value="1">1</button>
+            <button type="button" class="autoClimb-option" data-value="2">2</button>
+            <button type="button" class="autoClimb-option" data-value="3">3</button>
+            <button type="button" class="autoClimb-option" data-value="L">L</button>
+            <button type="button" class="autoClimb-option" data-value="No">No</button>
+          </div>
+          <span class="poll-value" id="autoClimb">No</span>
+        </div>
+
+        <div class="poll-row">
+          <span class="poll-label">Balls scored in teleop</span>
           <button type="button" class="decrement" data-key="balls">-</button>
           <span class="poll-value" id="balls">0</span>
           <button type="button" class="increment" data-key="balls">+</button>
         </div>
 
         <div class="poll-row">
-          <span class="poll-label">Rough percentage made</span>
+          <span class="poll-label">Balls missed in teleop</span>
           <button type="button" class="decrement" data-key="rough">-</button>
           <span class="poll-value" id="rough">0</span>
           <button type="button" class="increment" data-key="rough">+</button>
         </div>
 
-        <div class="poll-row">
+        <div class="poll-row climb-row">
           <span class="poll-label">Climb</span>
-          <button type="button" class="decrement" data-key="climb">-</button>
-          <span class="poll-value" id="climb">0</span>
-          <button type="button" class="increment" data-key="climb">+</button>
+          <div class="climb-buttons">
+            <button type="button" class="climb-option" data-value="1">1</button>
+            <button type="button" class="climb-option" data-value="2">2</button>
+            <button type="button" class="climb-option" data-value="3">3</button>
+            <button type="button" class="climb-option" data-value="L">L</button>
+            <button type="button" class="climb-option" data-value="No">No</button>
+          </div>
+          <span class="poll-value" id="climb">No</span>
         </div>
 
-        <div class="poll-row">
-          <span class="poll-label">Auto path</span>
-          <button type="button" class="decrement" data-key="auto">-</button>
-          <span class="poll-value" id="auto">0</span>
-          <button type="button" class="increment" data-key="auto">+</button>
+        <div class="poll-row climb-row">
+          <span class="poll-label">Can go under trench? </span>
+          <div class="climb-buttons">
+            <button type="button" class="toggle-option" data-key="trench" data-value="true">Yes</button>
+            <button type="button" class="toggle-option" data-key="trench" data-value="false">No</button>
+          </div>
         </div>
 
-        <div class="poll-row">
-          <span class="poll-label">Trench (Y/N)</span>
-          <button type="button" class="toggle" data-key="trench">Toggle</button>
-          <span class="poll-value" id="trench">No</span>
-        </div>
-
-        <div class="poll-row">
+        <div class="poll-row climb-row">
           <span class="poll-label">Can pick up from floor?</span>
-          <button type="button" class="toggle" data-key="pickupFloor">Toggle</button>
-          <span class="poll-value" id="pickupFloor">No</span>
+          <div class="climb-buttons">
+            <button type="button" class="toggle-option" data-key="pickupFloor" data-value="true">Yes</button>
+            <button type="button" class="toggle-option" data-key="pickupFloor" data-value="false">No</button>
+          </div>
         </div>
 
-        <div class="poll-row">
+        <div class="poll-row climb-row">
           <span class="poll-label">Can pick up from human player station?</span>
-          <button type="button" class="toggle" data-key="pickupHuman">Toggle</button>
-          <span class="poll-value" id="pickupHuman">No</span>
+          <div class="climb-buttons">
+            <button type="button" class="toggle-option" data-key="pickupHuman" data-value="true">Yes</button>
+            <button type="button" class="toggle-option" data-key="pickupHuman" data-value="false">No</button>
+          </div>
         </div>
 
-        <div class="poll-row">
-          <span class="poll-label">Shoot on move</span>
-          <button type="button" class="toggle" data-key="shoot">Toggle</button>
-          <span class="poll-value" id="shoot">No</span>
+        <div class="poll-row climb-row">
+          <span class="poll-label">Can shoot while moving?</span>
+          <div class="climb-buttons">
+            <button type="button" class="toggle-option" data-key="shoot" data-value="true">Yes</button>
+            <button type="button" class="toggle-option" data-key="shoot" data-value="false">No</button>
+          </div>
         </div>
 
         <div class="poll-row">
@@ -97,10 +122,11 @@
       const state = {
         teamNumber: '',
         matchNumber: '',
+        autoScore: 0,
+        autoClimb: 'No',
         balls: 0,
         rough: 0,
-        climb: 0,
-        auto: 0,
+        climb: 'No',
         trench: false,
         pickupFloor: false,
         pickupHuman: false,
@@ -110,14 +136,32 @@
 
       function updateDisplay(key) {
         const el = document.getElementById(key);
-        if (!el) return;
         const value = state[key];
-        if (key === 'rough') {
-          el.textContent = value + '%';
-        } else if (typeof value === 'boolean') {
-          el.textContent = value ? 'Yes' : 'No';
+        if (typeof value === 'boolean') {
+          if (el) {
+            el.textContent = value ? 'Yes' : 'No';
+          }
+          // Update toggle option button styles
+          document.querySelectorAll(`.toggle-option[data-key="${key}"]`).forEach(btn => {
+            const btnValue = btn.dataset.value === 'true';
+            btn.classList.toggle('active', btnValue === value);
+          });
         } else {
-          el.textContent = value;
+          if (el) {
+            el.textContent = value;
+          }
+        }
+        // Update climb button styles
+        if (key === 'climb') {
+          document.querySelectorAll('.climb-option').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.value === value);
+          });
+        }
+        // Update autoClimb button styles
+        if (key === 'autoClimb') {
+          document.querySelectorAll('.autoClimb-option').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.value === value);
+          });
         }
       }
 
@@ -136,53 +180,96 @@
         state.matchNumber = e.target.value;
       });
 
+      document.addEventListener('change', (event) => {
+        const checkbox = event.target;
+        if (checkbox.classList.contains('toggle-checkbox')) {
+          const key = checkbox.dataset.key;
+          state[key] = checkbox.checked;
+          updateDisplay(key);
+        }
+      });
+
       document.addEventListener('click', (event) => {
         const button = event.target.closest('button');
         if (!button) return;
+
+        if (button.classList.contains('toggle-option')) {
+          const key = button.dataset.key;
+          const value = button.dataset.value === 'true';
+          state[key] = value;
+          updateDisplay(key);
+          return;
+        }
+
+        if (button.classList.contains('climb-option')) {
+          state.climb = button.dataset.value;
+          updateDisplay('climb');
+          return;
+        }
+
+        if (button.classList.contains('autoClimb-option')) {
+          state.autoClimb = button.dataset.value;
+          updateDisplay('autoClimb');
+          return;
+        }
 
         const key = button.dataset.key;
         if (!key) return;
 
         if (button.classList.contains('increment')) {
-          const increment = key === 'rough' ? 5 : 1;
+          const increment = key === 'rough' ? 1 : 1;
           state[key] = clampNumber(state[key] + increment, key);
         } else if (button.classList.contains('decrement')) {
-          const decrement = key === 'rough' ? 5 : 1;
+          const decrement = key === 'rough' ? 1 : 1;
           state[key] = clampNumber(state[key] - decrement, key);
-        } else if (button.classList.contains('toggle')) {
-          state[key] = !state[key];
         }
 
         updateDisplay(key);
       });
 
       document.getElementById('submit-btn').addEventListener('click', () => {
-        alert("submitted");
-        // Reset all parameters
-        state.teamNumber = '';
-        state.matchNumber = '';
-        state.balls = 0;
-        state.rough = 0;
-        state.climb = 0;
-        state.auto = 0;
-        state.trench = false;
-        state.pickupFloor = false;
-        state.pickupHuman = false;
-        state.shoot = false;
-        state.storage = 0;
-        // Update inputs
-        document.getElementById('team-number').value = '';
-        document.getElementById('match-number').value = '';
-        // Update displays
-        updateDisplay('balls');
-        updateDisplay('rough');
-        updateDisplay('climb');
-        updateDisplay('auto');
-        updateDisplay('trench');
-        updateDisplay('pickupFloor');
-        updateDisplay('pickupHuman');
-        updateDisplay('shoot');
-        updateDisplay('storage');
+        const scriptUrl = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // Replace with your deployed Google Apps Script URL
+        fetch(scriptUrl, {
+          method: 'POST',
+          body: JSON.stringify(state),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => response.text())
+        .then(data => {
+          alert("submitted");
+          // Reset all parameters
+          state.teamNumber = '';
+          state.matchNumber = '';
+          state.autoScore = 0;
+          state.autoClimb = 'No';
+          state.balls = 0;
+          state.rough = 0;
+          state.climb = 'No';
+          state.trench = false;
+          state.pickupFloor = false;
+          state.pickupHuman = false;
+          state.shoot = false;
+          state.storage = 0;
+          // Update inputs
+          document.getElementById('team-number').value = '';
+          document.getElementById('match-number').value = '';
+          // Update displays
+          updateDisplay('autoScore');
+          updateDisplay('autoClimb');
+          updateDisplay('balls');
+          updateDisplay('rough');
+          updateDisplay('climb');
+          updateDisplay('trench');
+          updateDisplay('pickupFloor');
+          updateDisplay('pickupHuman');
+          updateDisplay('shoot');
+          updateDisplay('storage');
+        })
+        .catch(error => {
+          alert("Error submitting: " + error);
+        });
       });
     </script>
   </body>

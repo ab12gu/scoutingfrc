@@ -121,9 +121,12 @@ p {
   align-items: center;
   padding: 0.85rem 0.85rem;
   border-radius: 14px;
-  border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.85);
   transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.poll-row.climb-row {
+  grid-template-columns: auto 1fr auto;
 }
 
 .poll-row:hover {
@@ -166,17 +169,75 @@ button:active {
 
 button.increment {
   border-color: rgba(37, 99, 235, 0.4);
-  color: var(--primary);
+  color: white;
+  background: var(--frc-blue);
 }
 
 button.decrement {
   border-color: rgba(237, 27, 36, 0.35);
+  color: white;
+  background: var(--frc-red);
+}
+
+button.climb-option {
+  border-color: rgba(0, 87, 184, 0.35);
+  color: var(--frc-blue);
+}
+
+button.climb-option.active {
+  background: var(--frc-blue);
+  color: white;
+  border-color: var(--frc-blue);
+}
+
+button.autoClimb-option {
+  border-color: rgba(0, 87, 184, 0.35);
+  color: var(--frc-blue);
+}
+
+button.autoClimb-option.active {
+  background: var(--frc-blue);
+  color: white;
+  border-color: var(--frc-blue);
+}
+
+input.toggle-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--frc-blue);
+}
+
+button.toggle-option {
+  border-color: rgba(0, 87, 184, 0.35);
+  color: var(--frc-blue);
+}
+
+button.toggle-option[data-value="false"] {
+  border-color: rgba(237, 27, 36, 0.35);
   color: var(--frc-red);
 }
 
-button.toggle {
-  border-color: rgba(0, 87, 184, 0.35);
-  color: var(--frc-blue);
+button.toggle-option.active {
+  background: var(--frc-blue);
+  color: white;
+  border-color: var(--frc-blue);
+}
+
+button.toggle-option[data-value="false"].active {
+  background: var(--frc-red);
+  border-color: var(--frc-red);
+}
+
+.climb-buttons {
+  display: flex;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.climb-buttons button {
+  flex: 1;
+  min-width: 0;
 }
 
 @media (max-width: 640px) {
@@ -204,6 +265,28 @@ button.toggle {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
     gap: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .poll-row .poll-label {
+    order: -1;
+  }
+
+  .poll-row .increment {
+    order: 0;
+  }
+
+  .poll-row .poll-value {
+    order: 1;
+  }
+
+  .poll-row .decrement {
+    order: 2;
   }
 
   .poll-row button {
@@ -212,6 +295,21 @@ button.toggle {
 
   .poll-value {
     margin-top: 0.2rem;
+  }
+
+  .poll-row.climb-row {
+    grid-template-columns: 1fr;
+  }
+
+  .climb-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .climb-buttons button {
+    flex: 1 1 calc(20% - 0.24rem);
+    min-width: 45px;
   }
 }
 
