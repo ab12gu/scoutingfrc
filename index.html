@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FRC Scouting</title>
-    <link rel="stylesheet" href="/static/style.css?v=21">
+    <link rel="stylesheet" href="/static/style.css?v=24">
     <link rel="icon" type="image/x-icon" href="/static/images/scout-blue-skyblue.png">
   </head>
 
@@ -61,7 +61,7 @@
         <div class="poll-row">
           <span class="poll-label">Balls missed in teleop</span>
           <button type="button" class="decrement" data-key="rough">-</button>
-          <span class="poll-value" id="rough">0</span>
+          <input type="number" class="poll-input" id="rough-input" data-key="rough" value="0" min="0">
           <button type="button" class="increment" data-key="rough">+</button>
         </div>
 
@@ -112,7 +112,7 @@
         <div class="poll-row">
           <span class="poll-label">Storage capacity</span>
           <button type="button" class="decrement" data-key="storage">-</button>
-          <span class="poll-value" id="storage">0</span>
+          <input type="number" class="poll-input" id="storage-input" data-key="storage" value="0" min="0">
           <button type="button" class="increment" data-key="storage">+</button>
         </div>
       </div>
