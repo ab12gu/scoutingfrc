@@ -92,16 +92,6 @@
         </div>
 
         <div class="poll-row climb-row">
-          <span class="poll-label">Could robot go under trench? <span class="required-asterisk">*</span></span>
-          <div class="climb-buttons">
-            <button type="button" class="toggle-option" data-key="trenchUnder" data-value="true">Yes</button>
-            <button type="button" class="toggle-option" data-key="trenchUnder" data-value="false">No</button>
-            <button type="button" class="toggle-option" data-key="trenchUnder" data-value="N/A">N/A</button>
-          </div>
-        </div>
-
-
-        <div class="poll-row climb-row">
           <span class="poll-label">Balls missed <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
             <button type="button" class="missed-percentage-option" data-value="1-25">1-25</button>
@@ -155,15 +145,7 @@
         </div>
 
         <div class="poll-row climb-row">
-          <span class="poll-label">Can shoot while moving? <span class="required-asterisk">*</span></span>
-          <div class="climb-buttons">
-            <button type="button" class="toggle-option" data-key="shoot" data-value="true">Yes</button>
-            <button type="button" class="toggle-option" data-key="shoot" data-value="false">No</button>
-            <button type="button" class="toggle-option" data-key="shoot" data-value="N/A">N/A</button>
-          </div>
-        </div>
 
-        <div class="poll-row climb-row">
           <span class="poll-label">Storage capacity <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
             <button type="button" class="approx-storage-option" data-value="0">0</button>
@@ -200,7 +182,6 @@
         autoBallsScore: 'N/A',
         balls: 0,
         telepopBallsScore: 'N/A',
-        trenchUnder: false,
         approxMissedPercentage: '0',
         climb: 'No',
         trench: false,
@@ -230,11 +211,10 @@
               if (btn.dataset.value === 'N/A') {
                 btn.classList.add('active');
               }
-            } else {
-              const btnValue = btn.dataset.value === 'true';
-              if (btnValue === value) {
-                btn.classList.add('active');
-              }
+            } else if (value === true && btn.dataset.value === 'true') {
+              btn.classList.add('active');
+            } else if (value === false && btn.dataset.value === 'false') {
+              btn.classList.add('active');
             }
           });
         } else {
@@ -455,7 +435,6 @@
           autoBallsScore: state.autoBallsScore,
           autoClimb: state.autoClimb,
           telepopBallsScore: state.telepopBallsScore,
-          trenchUnder: state.trenchUnder === 'N/A' ? 'N/A' : (state.trenchUnder ? 'Yes' : 'No'),
           approxMissedPercentage: state.approxMissedPercentage,
           climb: state.climb,
           trench: state.trench === 'N/A' ? 'N/A' : (state.trench ? 'Yes' : 'No'),
@@ -473,18 +452,15 @@
         })
         .then(() => {
           alert("Data submitted successfully!");
-          // Reset all parameters
-          state.name = '';
+          // Reset all parameters (keeping name and robotStartSide)
           state.teamNumber = '';
           state.matchNumber = '';
           state.robotOnField = true;
-          state.robotStartSide = 'B1';
           state.autoScore = 0;
           state.autoClimb = 'No';
           state.autoBallsScore = 'N/A';
           state.balls = 0;
           state.telepopBallsScore = 'N/A';
-          state.trenchUnder = false;
           state.approxMissedPercentage = '0';
           state.climb = 'No';
           state.trench = false;
@@ -493,8 +469,7 @@
           state.shoot = false;
           state.approxStorage = '0';
           state.notes = '';
-          // Update inputs
-          document.getElementById('your-name').value = '';
+          // Update inputs (keeping name)
           document.getElementById('team-number').value = '';
           document.getElementById('match-number').value = '';
           document.getElementById('notes').value = '';
@@ -506,7 +481,6 @@
           updateDisplay('autoBallsScore');
           updateDisplay('balls');
           updateDisplay('telepopBallsScore');
-          updateDisplay('trenchUnder');
           updateDisplay('approxMissedPercentage');
           updateDisplay('climb');
           updateDisplay('trench');
@@ -514,9 +488,11 @@
           updateDisplay('pickupHuman');
           updateDisplay('shoot');
           updateDisplay('approxStorage');
-          // Clear all button active states
+          // Clear all button active states except robotStartSide
           document.querySelectorAll('button').forEach(btn => {
-            btn.classList.remove('active');
+            if (!btn.classList.contains('robot-start-option')) {
+              btn.classList.remove('active');
+            }
           });
         })
         .catch(error => {
