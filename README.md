@@ -8,14 +8,16 @@ Domain Address: [scoutingfrc.com](https://www.scoutingfrc.com)
 
 Defined by Gavin
 
-1. Balls scored
-2. Rough percentage made
-3. Climb
-4. Auto path
-5. Trench y n
-6. Pick up spot?
-7. Shoot on move
-8. Storage capacity
+1. Team #
+2. Match #
+3. Balls scored
+4. Rough percentage made
+5. Climb
+6. Auto path
+7. Trench y n
+8. Pick up spot?
+9. Shoot on move
+10. Storage capacity
 
 ## Installation
 
@@ -29,7 +31,9 @@ $ git clone https://github.com/ab12gu/scoutingfrc
 $ cd scoutingfrc
 ```
 
-2. Activate virtual env
+2. Request `.env` variable from me (Abhay) to add to root for `DJANGO_SECRET_KEY`
+
+3. Activate virtual env
 ```bash
 # Unix
 $ source .venv/bin/activate
@@ -38,7 +42,7 @@ $ source .venv/bin/activate
 $ .venv/Scripts/activate.ps1
 ```
 
-3. Install project dependencies
+4. Install project dependencies
 ```bash
 $ uv sync
 ```

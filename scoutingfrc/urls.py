@@ -1,5 +1,5 @@
 """
-URL configuration for scout-blue project.
+URL configuration for scoutingfrc project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -22,7 +22,7 @@ from django.http import HttpResponse
 
 def home(request):
     return render(request, 'index.html')
-    #return HttpResponse("Welcome to Scout Blue!")
+    #return HttpResponse("Welcome to Scout FRC!")
 
 urlpatterns = [
     path('', home),
