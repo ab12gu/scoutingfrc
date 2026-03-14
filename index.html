@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FRC Scouting</title>
-    <link rel="stylesheet" href="/static/style.css?v=28">
+    <link rel="stylesheet" href="/static/style.css?v=31">
     <link rel="icon" type="image/x-icon" href="/static/images/scout-blue-skyblue.png">
   </head>
 
@@ -50,7 +50,6 @@
             <button type="button" class="score-range-option-auto" data-value="100-200">100-200</button>
             <button type="button" class="score-range-option-auto" data-value="200+">200+</button>
           </div>
-          <span class="poll-value" id="autoBallsScore">0</span>
         </div>
 
         <div class="poll-row climb-row">
@@ -83,7 +82,6 @@
             <button type="button" class="score-range-option-teleop" data-value="100-200">100-200</button>
             <button type="button" class="score-range-option-teleop" data-value="200+">200+</button>
           </div>
-          <span class="poll-value" id="telepopBallsScore">0</span>
         </div>
 
         <div class="poll-row">
@@ -91,6 +89,17 @@
           <button type="button" class="decrement" data-key="rough">-</button>
           <input type="number" class="poll-input" id="rough-input" data-key="rough" value="0" min="0">
           <button type="button" class="increment" data-key="rough">+</button>
+        </div>
+
+        <div class="poll-row climb-row">
+          <span class="poll-label">Approx balls missed (%)</span>
+          <div class="climb-buttons">
+            <button type="button" class="missed-percentage-option" data-value="0">0</button>
+            <button type="button" class="missed-percentage-option" data-value="25%">25</button>
+            <button type="button" class="missed-percentage-option" data-value="50%">50</button>
+            <button type="button" class="missed-percentage-option" data-value="75%">75</button>
+            <button type="button" class="missed-percentage-option" data-value="100%">100</button>
+          </div>
         </div>
 
         <div class="poll-row climb-row">
@@ -145,7 +154,7 @@
         </div>
 
         <div class="poll-row climb-row">
-          <span class="poll-label">Approx storage capacity</span>
+          <span class="poll-label">Approx. storage capacity</span>
           <div class="climb-buttons">
             <button type="button" class="approx-storage-option" data-value="0">0</button>
             <button type="button" class="approx-storage-option" data-value="5">5</button>
@@ -155,7 +164,6 @@
             <button type="button" class="approx-storage-option" data-value="40">40</button>
             <button type="button" class="approx-storage-option" data-value="50+">50+</button>
           </div>
-          <span class="poll-value" id="approxStorage">0</span>
         </div>
       </div>
 
@@ -180,6 +188,7 @@
         balls: 0,
         telepopBallsScore: '0',
         rough: 0,
+        approxMissedPercentage: '0',
         climb: 'No',
         trench: false,
         pickupFloor: false,
@@ -249,6 +258,12 @@
           if (el) {
             el.textContent = value;
           }
+        }
+        // Update approx missed percentage button styles
+        if (key === 'approxMissedPercentage') {
+          document.querySelectorAll('.missed-percentage-option').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.value === value);
+          });
         }
       }
 
@@ -341,6 +356,12 @@
           return;
         }
 
+        if (button.classList.contains('missed-percentage-option')) {
+          state.approxMissedPercentage = button.dataset.value;
+          updateDisplay('approxMissedPercentage');
+          return;
+        }
+
         const key = button.dataset.key;
         if (!key) return;
 
@@ -384,6 +405,7 @@
           state.balls = 0;
           state.telepopBallsScore = '0';
           state.rough = 0;
+          state.approxMissedPercentage = '0';
           state.climb = 'No';
           state.trench = false;
           state.pickupFloor = false;
@@ -404,6 +426,7 @@
           updateDisplay('balls');
           updateDisplay('telepopBallsScore');
           updateDisplay('rough');
+          updateDisplay('approxMissedPercentage');
           updateDisplay('climb');
           updateDisplay('trench');
           updateDisplay('pickupFloor');
