@@ -423,6 +423,16 @@
           return;
         }
 
+        // Disable form during submission
+        const submitBtn = document.getElementById('submit-btn');
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+        
+        // Disable all inputs and buttons while submitting
+        const allInputs = document.querySelectorAll('input, button:not(#submit-btn)');
+        allInputs.forEach(el => el.disabled = true);
+
         const scriptUrl = 'https://script.google.com/macros/s/AKfycbwELMK6enk3vwtbK0QfrG1EHVJ-N1YTmXW5fXCGzAkfzX_c_IQ107APv3nvwxNcc5Pc/exec';
         
         // Build submission object in UI order
@@ -452,9 +462,13 @@
         })
         .then(() => {
           alert("Data submitted successfully!");
-          // Reset all parameters (keeping name and robotStartSide)
+          // Increment match number
+          const currentMatchNumber = parseInt(state.matchNumber) || 0;
+          const nextMatchNumber = currentMatchNumber + 1;
+          state.matchNumber = String(nextMatchNumber);
+          
+          // Reset all parameters (keeping name and robotStartSide and incremented matchNumber)
           state.teamNumber = '';
-          state.matchNumber = '';
           state.robotOnField = true;
           state.autoScore = 0;
           state.autoClimb = 'No';
@@ -469,9 +483,9 @@
           state.shoot = false;
           state.approxStorage = '0';
           state.notes = '';
-          // Update inputs (keeping name)
+          // Update inputs (keeping name and incrementing match number)
           document.getElementById('team-number').value = '';
-          document.getElementById('match-number').value = '';
+          document.getElementById('match-number').value = nextMatchNumber;
           document.getElementById('notes').value = '';
           // Update displays
           updateDisplay('robotOnField');
@@ -494,9 +508,19 @@
               btn.classList.remove('active');
             }
           });
+          
+          // Re-enable form
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+          allInputs.forEach(el => el.disabled = false);
         })
         .catch(error => {
           alert("Error submitting: " + error);
+          
+          // Re-enable form on error
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+          allInputs.forEach(el => el.disabled = false);
         });
       });
     </script>
