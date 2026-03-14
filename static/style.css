@@ -184,10 +184,20 @@ button.climb-option {
   color: var(--frc-blue);
 }
 
+button.climb-option[data-value="No"] {
+  border-color: rgba(237, 27, 36, 0.35);
+  color: var(--frc-red);
+}
+
 button.climb-option.active {
   background: var(--frc-blue);
   color: white;
   border-color: var(--frc-blue);
+}
+
+button.climb-option[data-value="No"].active {
+  background: var(--frc-red);
+  border-color: var(--frc-red);
 }
 
 button.autoClimb-option {
@@ -195,10 +205,20 @@ button.autoClimb-option {
   color: var(--frc-blue);
 }
 
+button.autoClimb-option[data-value="No"] {
+  border-color: rgba(237, 27, 36, 0.35);
+  color: var(--frc-red);
+}
+
 button.autoClimb-option.active {
   background: var(--frc-blue);
   color: white;
   border-color: var(--frc-blue);
+}
+
+button.autoClimb-option[data-value="No"].active {
+  background: var(--frc-red);
+  border-color: var(--frc-red);
 }
 
 input.toggle-checkbox {
