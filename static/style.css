@@ -221,6 +221,16 @@ button.climb-option[data-value="No"] {
   color: var(--frc-red);
 }
 
+button.climb-option[data-value="3"] {
+  border-color: rgba(30, 132, 73, 0.35);
+  color: var(--frc-green);
+}
+
+button.climb-option[data-value="Park"] {
+  border-color: rgba(245, 124, 0, 0.35);
+  color: #F57C00;
+}
+
 button.climb-option.active {
   background: var(--frc-blue);
   color: white;
@@ -230,6 +240,18 @@ button.climb-option.active {
 button.climb-option[data-value="No"].active {
   background: var(--frc-red);
   border-color: var(--frc-red);
+}
+
+button.climb-option[data-value="3"].active {
+  background: var(--frc-green);
+  color: white;
+  border-color: var(--frc-green);
+}
+
+button.climb-option[data-value="Park"].active {
+  background: #F57C00;
+  color: white;
+  border-color: #F57C00;
 }
 
 button.autoClimb-option {
@@ -242,6 +264,11 @@ button.autoClimb-option[data-value="No"] {
   color: var(--frc-red);
 }
 
+button.autoClimb-option[data-value="Park"] {
+  border-color: rgba(245, 124, 0, 0.35);
+  color: #F57C00;
+}
+
 button.autoClimb-option.active {
   background: var(--frc-blue);
   color: white;
@@ -251,6 +278,12 @@ button.autoClimb-option.active {
 button.autoClimb-option[data-value="No"].active {
   background: var(--frc-red);
   border-color: var(--frc-red);
+}
+
+button.autoClimb-option[data-value="Park"].active {
+  background: #F57C00;
+  color: white;
+  border-color: #F57C00;
 }
 
 button.robot-start-option {
@@ -278,6 +311,17 @@ button.approx-storage-option[data-value="0"] {
   color: var(--frc-red);
 }
 
+button.approx-storage-option[data-value="50+"] {
+  border-color: rgba(30, 132, 73, 0.35);
+  color: var(--frc-green);
+}
+
+button.approx-storage-option[data-value="50+"].active {
+  background: var(--frc-green);
+  color: white;
+  border-color: var(--frc-green);
+}
+
 button.score-range-option-auto.active,
 button.score-range-option-teleop.active,
 button.approx-storage-option.active {
@@ -294,6 +338,17 @@ button.approx-storage-option[data-value="0"].active {
   border-color: var(--frc-red);
 }
 
+button.score-range-option-auto[data-value="40+"] {
+  border-color: rgba(30, 132, 73, 0.35);
+  color: var(--frc-green);
+}
+
+button.score-range-option-auto[data-value="40+"].active {
+  background: var(--frc-green);
+  color: white;
+  border-color: var(--frc-green);
+}
+
 button.score-range-option-auto[data-value="N/A"] {
   border-color: rgba(88, 96, 108, 0.35);
   color: var(--muted);
@@ -304,6 +359,17 @@ button.score-range-option-auto[data-value="N/A"].active {
   background: var(--muted);
   color: white;
   border-color: var(--muted);
+}
+
+button.score-range-option-teleop[data-value="150+"] {
+  border-color: rgba(30, 132, 73, 0.35);
+  color: var(--frc-green);
+}
+
+button.score-range-option-teleop[data-value="150+"].active {
+  background: var(--frc-green);
+  color: white;
+  border-color: var(--frc-green);
 }
 
 button.score-range-option-teleop[data-value="N/A"] {
@@ -567,6 +633,17 @@ button.missed-percentage-option[data-value="0"] {
 button.missed-percentage-option[data-value="100%"] {
   border-color: rgba(237, 27, 36, 0.35);
   color: var(--frc-red);
+}
+
+button.missed-percentage-option[data-value="150+"] {
+  border-color: rgba(30, 132, 73, 0.35);
+  color: var(--frc-green);
+}
+
+button.missed-percentage-option[data-value="150+"].active {
+  background: var(--frc-green);
+  color: white;
+  border-color: var(--frc-green);
 }
 
 button.missed-percentage-option.active {

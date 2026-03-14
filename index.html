@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FRC Scouting</title>
-    <link rel="stylesheet" href="/static/style.css?v=43">
+    <link rel="stylesheet" href="/static/style.css?v=47">
     <link rel="icon" type="image/x-icon" href="/static/images/scout-blue-skyblue.png">
   </head>
 
@@ -18,15 +18,15 @@
       <div class="match-info">
         <div class="input-row">
           <label for="your-name">Your Name: <span class="required-asterisk">*</span></label>
-          <input type="text" id="your-name" placeholder="e.g. John">
+          <input type="text" id="your-name" placeholder="e.g. Gavin">
         </div>
         <div class="input-row">
           <label for="team-number">Team Number: <span class="required-asterisk">*</span></label>
-          <input type="text" id="team-number" placeholder="e.g. 1234">
+          <input type="text" id="team-number" placeholder="e.g. 360">
         </div>
         <div class="input-row">
           <label for="match-number">Match Number: <span class="required-asterisk">*</span></label>
-          <input type="text" id="match-number" placeholder="e.g. Q1">
+          <input type="text" id="match-number" placeholder="e.g. 11">
         </div>
       </div>
 
@@ -69,11 +69,10 @@
             <button type="button" class="autoClimb-option" data-value="1">1</button>
             <button type="button" class="autoClimb-option" data-value="2">2</button>
             <button type="button" class="autoClimb-option" data-value="3">3</button>
-            <button type="button" class="autoClimb-option" data-value="Park">P</button>
+            <button type="button" class="autoClimb-option" data-value="Park">Park</button>
             <button type="button" class="autoClimb-option" data-value="No">No</button>
             <button type="button" class="autoClimb-option" data-value="N/A">N/A</button>
           </div>
-          <span class="poll-value" id="autoClimb">No</span>
         </div>
 
         <div class="poll-row climb-row">
@@ -101,13 +100,15 @@
 
 
         <div class="poll-row climb-row">
-          <span class="poll-label">Balls missed (%) <span class="required-asterisk">*</span></span>
+          <span class="poll-label">Balls missed <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
-            <button type="button" class="missed-percentage-option" data-value="0">0</button>
-            <button type="button" class="missed-percentage-option" data-value="25%">25</button>
-            <button type="button" class="missed-percentage-option" data-value="50%">50</button>
-            <button type="button" class="missed-percentage-option" data-value="75%">75</button>
-            <button type="button" class="missed-percentage-option" data-value="100%">100</button>
+            <button type="button" class="missed-percentage-option" data-value="1-25">1-25</button>
+            <button type="button" class="missed-percentage-option" data-value="25-50">25-50</button>
+            <button type="button" class="missed-percentage-option" data-value="50-75">50-75</button>
+            <button type="button" class="missed-percentage-option" data-value="75-100">75-100</button>
+            <button type="button" class="missed-percentage-option" data-value="100-125">100-125</button>
+            <button type="button" class="missed-percentage-option" data-value="125-150">125-150</button>
+            <button type="button" class="missed-percentage-option" data-value="150+">150+</button>
             <button type="button" class="missed-percentage-option" data-value="N/A">N/A</button>
           </div>
         </div>
@@ -118,11 +119,10 @@
             <button type="button" class="climb-option" data-value="1">1</button>
             <button type="button" class="climb-option" data-value="2">2</button>
             <button type="button" class="climb-option" data-value="3">3</button>
-            <button type="button" class="climb-option" data-value="Park">P</button>
+            <button type="button" class="climb-option" data-value="Park">Park</button>
             <button type="button" class="climb-option" data-value="No">No</button>
             <button type="button" class="climb-option" data-value="N/A">N/A</button>
           </div>
-          <span class="poll-value" id="climb">No</span>
         </div>
 
         <div class="poll-row climb-row">
