@@ -3,15 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Match Scouting Poll</title>
+    <title>FRC Scouting</title>
     <link rel="stylesheet" href="/static/style.css" />
+    <link rel="icon" type="image/x-icon" href="/static/images/scout-blue-skyblue.png">
   </head>
 
   <body>
     <main>
-      <h1>Match Scouting Poll</h1>
+      <header class="main-header">
+        <img class="app-logo" src="/static/images/final-logo.svg" alt="FRC Logo" />
+        <h1>FRC Scouting</h1>
+        <p class="lead">Track match performance with a quick tap — no account needed.</p>
+      </header>
 
-      <p>Use the buttons to track values. This data is only kept in the browser and is not saved.</p>
+      <div class="match-info">
+        <div class="input-row">
+          <label for="team-number">Team Number:</label>
+          <input type="text" id="team-number" placeholder="e.g. 1234">
+        </div>
+        <div class="input-row">
+          <label for="match-number">Match Number:</label>
+          <input type="text" id="match-number" placeholder="e.g. Q1">
+        </div>
+      </div>
 
       <div class="poll">
         <div class="poll-row">
@@ -49,9 +63,15 @@
         </div>
 
         <div class="poll-row">
-          <span class="poll-label">Pick up spot?</span>
-          <button type="button" class="toggle" data-key="pickup">Toggle</button>
-          <span class="poll-value" id="pickup">No</span>
+          <span class="poll-label">Can pick up from floor?</span>
+          <button type="button" class="toggle" data-key="pickupFloor">Toggle</button>
+          <span class="poll-value" id="pickupFloor">No</span>
+        </div>
+
+        <div class="poll-row">
+          <span class="poll-label">Can pick up from human player station?</span>
+          <button type="button" class="toggle" data-key="pickupHuman">Toggle</button>
+          <span class="poll-value" id="pickupHuman">No</span>
         </div>
 
         <div class="poll-row">
@@ -67,16 +87,23 @@
           <button type="button" class="increment" data-key="storage">+</button>
         </div>
       </div>
+
+      <div class="submit-section">
+        <button type="button" id="submit-btn">Submit Data</button>
+      </div>
     </main>
 
     <script>
       const state = {
+        teamNumber: '',
+        matchNumber: '',
         balls: 0,
         rough: 0,
         climb: 0,
         auto: 0,
         trench: false,
-        pickup: false,
+        pickupFloor: false,
+        pickupHuman: false,
         shoot: false,
         storage: 0,
       };
@@ -85,16 +112,29 @@
         const el = document.getElementById(key);
         if (!el) return;
         const value = state[key];
-        if (typeof value === 'boolean') {
+        if (key === 'rough') {
+          el.textContent = value + '%';
+        } else if (typeof value === 'boolean') {
           el.textContent = value ? 'Yes' : 'No';
         } else {
           el.textContent = value;
         }
       }
 
-      function clampNumber(value) {
+      function clampNumber(value, key) {
+        if (key === 'rough') {
+          return Math.max(0, Math.min(100, value));
+        }
         return Math.max(0, value);
       }
+
+      document.getElementById('team-number').addEventListener('input', (e) => {
+        state.teamNumber = e.target.value;
+      });
+
+      document.getElementById('match-number').addEventListener('input', (e) => {
+        state.matchNumber = e.target.value;
+      });
 
       document.addEventListener('click', (event) => {
         const button = event.target.closest('button');
@@ -104,14 +144,45 @@
         if (!key) return;
 
         if (button.classList.contains('increment')) {
-          state[key] = clampNumber(state[key] + 1);
+          const increment = key === 'rough' ? 5 : 1;
+          state[key] = clampNumber(state[key] + increment, key);
         } else if (button.classList.contains('decrement')) {
-          state[key] = clampNumber(state[key] - 1);
+          const decrement = key === 'rough' ? 5 : 1;
+          state[key] = clampNumber(state[key] - decrement, key);
         } else if (button.classList.contains('toggle')) {
           state[key] = !state[key];
         }
 
         updateDisplay(key);
+      });
+
+      document.getElementById('submit-btn').addEventListener('click', () => {
+        alert("submitted");
+        // Reset all parameters
+        state.teamNumber = '';
+        state.matchNumber = '';
+        state.balls = 0;
+        state.rough = 0;
+        state.climb = 0;
+        state.auto = 0;
+        state.trench = false;
+        state.pickupFloor = false;
+        state.pickupHuman = false;
+        state.shoot = false;
+        state.storage = 0;
+        // Update inputs
+        document.getElementById('team-number').value = '';
+        document.getElementById('match-number').value = '';
+        // Update displays
+        updateDisplay('balls');
+        updateDisplay('rough');
+        updateDisplay('climb');
+        updateDisplay('auto');
+        updateDisplay('trench');
+        updateDisplay('pickupFloor');
+        updateDisplay('pickupHuman');
+        updateDisplay('shoot');
+        updateDisplay('storage');
       });
     </script>
   </body>

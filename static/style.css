@@ -1,13 +1,18 @@
 /* Global */
 :root {
-  --bg: #f9fafb;
+  /* FRC colors */
+  --bg: #f6f8fb;
   --card: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --border: rgba(15, 23, 42, 0.12);
-  --primary: #2563eb;
+  --text: #0b1220;
+  --muted: #58606c;
+  --border: rgba(11, 18, 32, 0.12);
+
+  --frc-blue: #0057B8;
+  --frc-red: #ED1B24;
+  --primary: var(--frc-blue);
   --primary-contrast: #ffffff;
-  --shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+
+  --shadow: 0 14px 30px rgba(11, 18, 32, 0.14);
   --radius: 16px;
 }
 
@@ -18,18 +23,77 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: linear-gradient(180deg, #eef2ff 0%, #f9fafb 52%, #fef3c7 100%);
+  background: #001F3F !important;
+  background-image: none !important;
   color: var(--text);
-  padding: 1.25rem;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.main-header {
+  text-align: center;
+  padding: 1.75rem 1.5rem 1.1rem;
+}
+
+.app-logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 0.75rem;
+}
+
+.main-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  letter-spacing: 0.02em;
+}
+
+.main-header .lead {
+  margin: 0.55rem 0 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.match-info {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.input-row label {
+  font-weight: 600;
+  min-width: 120px;
+  color: var(--text);
+}
+
+.input-row input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text);
+}
+
+.input-row input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(0, 87, 184, 0.2);
 }
 
 main {
-  max-width: 640px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid var(--border);
+  max-width: 720px;
+  margin: 0 auto 2rem auto;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: var(--radius);
-  padding: 1.5rem;
+  padding: 1.75rem;
   box-shadow: var(--shadow);
 }
 
@@ -91,7 +155,7 @@ button {
 }
 
 button:hover {
-  background: rgba(37, 99, 235, 0.13);
+  background: rgba(0, 87, 184, 0.16);
   transform: translateY(-1px);
 }
 
@@ -106,18 +170,34 @@ button.increment {
 }
 
 button.decrement {
-  border-color: rgba(239, 68, 68, 0.35);
-  color: #b91c1c;
+  border-color: rgba(237, 27, 36, 0.35);
+  color: var(--frc-red);
 }
 
 button.toggle {
-  border-color: rgba(34, 197, 94, 0.35);
-  color: #157e3e;
+  border-color: rgba(0, 87, 184, 0.35);
+  color: var(--frc-blue);
 }
 
 @media (max-width: 640px) {
   main {
     padding: 1.25rem;
+  }
+
+  .match-info {
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.25rem;
+  }
+
+  .input-row label {
+    min-width: unset;
+    margin-bottom: 0.25rem;
   }
 
   .poll-row {
@@ -144,4 +224,29 @@ button.toggle {
   .poll-row {
     grid-template-columns: 1fr auto auto auto;
   }
+
+  main {
+    margin-top: 1.5rem;
+  }
+}
+
+.submit-section {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+#submit-btn {
+  background: var(--frc-blue);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+#submit-btn:hover {
+  background: #004080;
 }
