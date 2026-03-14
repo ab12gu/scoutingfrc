@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FRC Scouting</title>
-    <link rel="stylesheet" href="/static/style.css?v=32">
+    <link rel="stylesheet" href="/static/style.css?v=43">
     <link rel="icon" type="image/x-icon" href="/static/images/scout-blue-skyblue.png">
   </head>
 
@@ -13,148 +13,156 @@
       <header class="main-header">
         <img class="app-logo" src="/static/images/4682-v2.png" alt="FRC Logo" />
         <h1>FRC Scouting</h1>
-        <p class="lead">Track match performance with a quick tap — no account needed.</p>
       </header>
 
       <div class="match-info">
         <div class="input-row">
-          <label for="your-name">Your Name:</label>
+          <label for="your-name">Your Name: <span class="required-asterisk">*</span></label>
           <input type="text" id="your-name" placeholder="e.g. John">
         </div>
         <div class="input-row">
-          <label for="team-number">Team Number:</label>
+          <label for="team-number">Team Number: <span class="required-asterisk">*</span></label>
           <input type="text" id="team-number" placeholder="e.g. 1234">
         </div>
         <div class="input-row">
-          <label for="match-number">Match Number:</label>
+          <label for="match-number">Match Number: <span class="required-asterisk">*</span></label>
           <input type="text" id="match-number" placeholder="e.g. Q1">
         </div>
       </div>
 
       <div class="poll">
-        <div class="poll-row">        
-          <span class="poll-label">Balls scored in auto</span>
-          <button type="button" class="decrement" data-key="autoScore">-</button>
-          <input type="number" class="poll-input" id="autoScore-input" data-key="autoScore" value="0" min="0">
-          <button type="button" class="increment" data-key="autoScore">+</button>
-        </div>
-
         <div class="poll-row climb-row">
-          <span class="poll-label">Approx. Auto Balls Scored</span>
+          <span class="poll-label">Is the robot on the field? <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
-            <button type="button" class="score-range-option-auto" data-value="0">0</button>
-            <button type="button" class="score-range-option-auto" data-value="1-25">1-25</button>
-            <button type="button" class="score-range-option-auto" data-value="25-50">25-50</button>
-            <button type="button" class="score-range-option-auto" data-value="50-75">50-75</button>
-            <button type="button" class="score-range-option-auto" data-value="75-100">75-100</button>
-            <button type="button" class="score-range-option-auto" data-value="100-200">100-200</button>
-            <button type="button" class="score-range-option-auto" data-value="200+">200+</button>
+            <button type="button" class="toggle-option" data-key="robotOnField" data-value="true">Yes</button>
+            <button type="button" class="toggle-option" data-key="robotOnField" data-value="false">No</button>
           </div>
         </div>
 
         <div class="poll-row climb-row">
-          <span class="poll-label">Auto climb</span>
+          <span class="poll-label">Which side does robot start on? <span class="required-asterisk">*</span></span>
+          <div class="climb-buttons">
+            <button type="button" class="robot-start-option" data-value="B1">B1</button>
+            <button type="button" class="robot-start-option" data-value="B2">B2</button>
+            <button type="button" class="robot-start-option" data-value="B3">B3</button>
+            <button type="button" class="robot-start-option" data-value="R1">R1</button>
+            <button type="button" class="robot-start-option" data-value="R2">R2</button>
+            <button type="button" class="robot-start-option" data-value="R3">R3</button>
+            <button type="button" class="robot-start-option" data-value="N/A">N/A</button>
+          </div>
+        </div>
+
+        <div class="poll-row climb-row">
+          <span class="poll-label">Auto Balls Scored <span class="required-asterisk">*</span></span>
+          <div class="climb-buttons">
+            <button type="button" class="score-range-option-auto" data-value="1-10">1-10</button>
+            <button type="button" class="score-range-option-auto" data-value="10-25">10-25</button>
+            <button type="button" class="score-range-option-auto" data-value="25-40">25-40</button>
+            <button type="button" class="score-range-option-auto" data-value="40+">40+</button>
+            <button type="button" class="score-range-option-auto" data-value="N/A">N/A</button>
+          </div>
+        </div>
+
+        <div class="poll-row climb-row">
+          <span class="poll-label">Auto climb <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
             <button type="button" class="autoClimb-option" data-value="1">1</button>
             <button type="button" class="autoClimb-option" data-value="2">2</button>
             <button type="button" class="autoClimb-option" data-value="3">3</button>
             <button type="button" class="autoClimb-option" data-value="Park">P</button>
             <button type="button" class="autoClimb-option" data-value="No">No</button>
+            <button type="button" class="autoClimb-option" data-value="N/A">N/A</button>
           </div>
           <span class="poll-value" id="autoClimb">No</span>
         </div>
 
-        <div class="poll-row">
-          <span class="poll-label">Balls scored in teleop</span>
-          <button type="button" class="decrement" data-key="balls">-</button>
-          <input type="number" class="poll-input" id="balls-input" data-key="balls" value="0" min="0">
-          <button type="button" class="increment" data-key="balls">+</button>
-        </div>
-
         <div class="poll-row climb-row">
-          <span class="poll-label">Approx. Teleop Balls Scored</span>
+          <span class="poll-label">Teleop Balls Scored <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
-            <button type="button" class="score-range-option-teleop" data-value="0">0</button>
             <button type="button" class="score-range-option-teleop" data-value="1-25">1-25</button>
             <button type="button" class="score-range-option-teleop" data-value="25-50">25-50</button>
             <button type="button" class="score-range-option-teleop" data-value="50-75">50-75</button>
             <button type="button" class="score-range-option-teleop" data-value="75-100">75-100</button>
-            <button type="button" class="score-range-option-teleop" data-value="100-200">100-200</button>
-            <button type="button" class="score-range-option-teleop" data-value="200+">200+</button>
+            <button type="button" class="score-range-option-teleop" data-value="100-125">100-125</button>
+            <button type="button" class="score-range-option-teleop" data-value="125-150">125-150</button>
+            <button type="button" class="score-range-option-teleop" data-value="150+">150+</button>
+            <button type="button" class="score-range-option-teleop" data-value="N/A">N/A</button>
           </div>
         </div>
 
-        <div class="poll-row">
-          <span class="poll-label">Balls missed in teleop</span>
-          <button type="button" class="decrement" data-key="rough">-</button>
-          <input type="number" class="poll-input" id="rough-input" data-key="rough" value="0" min="0">
-          <button type="button" class="increment" data-key="rough">+</button>
+        <div class="poll-row climb-row">
+          <span class="poll-label">Could robot go under trench? <span class="required-asterisk">*</span></span>
+          <div class="climb-buttons">
+            <button type="button" class="toggle-option" data-key="trenchUnder" data-value="true">Yes</button>
+            <button type="button" class="toggle-option" data-key="trenchUnder" data-value="false">No</button>
+            <button type="button" class="toggle-option" data-key="trenchUnder" data-value="N/A">N/A</button>
+          </div>
         </div>
 
+
         <div class="poll-row climb-row">
-          <span class="poll-label">Approx balls missed (%)</span>
+          <span class="poll-label">Balls missed (%) <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
             <button type="button" class="missed-percentage-option" data-value="0">0</button>
             <button type="button" class="missed-percentage-option" data-value="25%">25</button>
             <button type="button" class="missed-percentage-option" data-value="50%">50</button>
             <button type="button" class="missed-percentage-option" data-value="75%">75</button>
             <button type="button" class="missed-percentage-option" data-value="100%">100</button>
+            <button type="button" class="missed-percentage-option" data-value="N/A">N/A</button>
           </div>
         </div>
 
         <div class="poll-row climb-row">
-          <span class="poll-label">Climb</span>
+          <span class="poll-label">Climb <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
             <button type="button" class="climb-option" data-value="1">1</button>
             <button type="button" class="climb-option" data-value="2">2</button>
             <button type="button" class="climb-option" data-value="3">3</button>
             <button type="button" class="climb-option" data-value="Park">P</button>
             <button type="button" class="climb-option" data-value="No">No</button>
+            <button type="button" class="climb-option" data-value="N/A">N/A</button>
           </div>
           <span class="poll-value" id="climb">No</span>
         </div>
 
         <div class="poll-row climb-row">
-          <span class="poll-label">Can go under trench? </span>
+          <span class="poll-label">Can go under trench? <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
             <button type="button" class="toggle-option" data-key="trench" data-value="true">Yes</button>
             <button type="button" class="toggle-option" data-key="trench" data-value="false">No</button>
+            <button type="button" class="toggle-option" data-key="trench" data-value="N/A">N/A</button>
           </div>
         </div>
 
         <div class="poll-row climb-row">
-          <span class="poll-label">Can pick up from floor?</span>
+          <span class="poll-label">Pick up from floor? <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
             <button type="button" class="toggle-option" data-key="pickupFloor" data-value="true">Yes</button>
             <button type="button" class="toggle-option" data-key="pickupFloor" data-value="false">No</button>
+            <button type="button" class="toggle-option" data-key="pickupFloor" data-value="N/A">N/A</button>
           </div>
         </div>
 
         <div class="poll-row climb-row">
-          <span class="poll-label">Can pick up from human player station?</span>
+          <span class="poll-label">Pick up from human player station? <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
             <button type="button" class="toggle-option" data-key="pickupHuman" data-value="true">Yes</button>
             <button type="button" class="toggle-option" data-key="pickupHuman" data-value="false">No</button>
+            <button type="button" class="toggle-option" data-key="pickupHuman" data-value="N/A">N/A</button>
           </div>
         </div>
 
         <div class="poll-row climb-row">
-          <span class="poll-label">Can shoot while moving?</span>
+          <span class="poll-label">Can shoot while moving? <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
             <button type="button" class="toggle-option" data-key="shoot" data-value="true">Yes</button>
             <button type="button" class="toggle-option" data-key="shoot" data-value="false">No</button>
+            <button type="button" class="toggle-option" data-key="shoot" data-value="N/A">N/A</button>
           </div>
         </div>
 
-        <div class="poll-row">
-          <span class="poll-label">Storage capacity</span>
-          <button type="button" class="decrement" data-key="storage">-</button>
-          <input type="number" class="poll-input" id="storage-input" data-key="storage" value="0" min="0">
-          <button type="button" class="increment" data-key="storage">+</button>
-        </div>
-
         <div class="poll-row climb-row">
-          <span class="poll-label">Approx. storage capacity</span>
+          <span class="poll-label">Storage capacity <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
             <button type="button" class="approx-storage-option" data-value="0">0</button>
             <button type="button" class="approx-storage-option" data-value="5">5</button>
@@ -163,6 +171,7 @@
             <button type="button" class="approx-storage-option" data-value="30">30</button>
             <button type="button" class="approx-storage-option" data-value="40">40</button>
             <button type="button" class="approx-storage-option" data-value="50+">50+</button>
+            <button type="button" class="approx-storage-option" data-value="N/A">N/A</button>
           </div>
         </div>
       </div>
@@ -182,19 +191,20 @@
         name: '',
         teamNumber: '',
         matchNumber: '',
+        robotOnField: true,
+        robotStartSide: 'B1',
         autoScore: 0,
         autoClimb: 'No',
-        autoBallsScore: '0',
+        autoBallsScore: 'N/A',
         balls: 0,
-        telepopBallsScore: '0',
-        rough: 0,
+        telepopBallsScore: 'N/A',
+        trenchUnder: false,
         approxMissedPercentage: '0',
         climb: 'No',
         trench: false,
         pickupFloor: false,
         pickupHuman: false,
         shoot: false,
-        storage: 0,
         approxStorage: '0',
         notes: '',
       };
@@ -203,14 +213,22 @@
         const el = document.getElementById(key);
         const input = document.getElementById(key + '-input');
         const value = state[key];
-        if (typeof value === 'boolean') {
+        if (typeof value === 'boolean' || value === 'N/A') {
           if (el) {
-            el.textContent = value ? 'Yes' : 'No';
+            if (value === 'N/A') {
+              el.textContent = 'N/A';
+            } else {
+              el.textContent = value ? 'Yes' : 'No';
+            }
           }
           // Update toggle option button styles
           document.querySelectorAll(`.toggle-option[data-key="${key}"]`).forEach(btn => {
-            const btnValue = btn.dataset.value === 'true';
-            btn.classList.toggle('active', btnValue === value);
+            if (value === 'N/A') {
+              btn.classList.toggle('active', btn.dataset.value === 'N/A');
+            } else {
+              const btnValue = btn.dataset.value === 'true';
+              btn.classList.toggle('active', btnValue === value);
+            }
           });
         } else {
           if (el) {
@@ -229,6 +247,12 @@
         // Update autoClimb button styles
         if (key === 'autoClimb') {
           document.querySelectorAll('.autoClimb-option').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.value === value);
+          });
+        }
+        // Update robot start side button styles
+        if (key === 'robotStartSide') {
+          document.querySelectorAll('.robot-start-option').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.value === value);
           });
         }
@@ -268,9 +292,6 @@
       }
 
       function clampNumber(value, key) {
-        if (key === 'rough') {
-          return Math.max(0, Math.min(100, value));
-        }
         return Math.max(0, value);
       }
 
@@ -320,7 +341,12 @@
 
         if (button.classList.contains('toggle-option')) {
           const key = button.dataset.key;
-          const value = button.dataset.value === 'true';
+          let value;
+          if (button.dataset.value === 'N/A') {
+            value = 'N/A';
+          } else {
+            value = button.dataset.value === 'true';
+          }
           state[key] = value;
           updateDisplay(key);
           return;
@@ -335,6 +361,12 @@
         if (button.classList.contains('autoClimb-option')) {
           state.autoClimb = button.dataset.value;
           updateDisplay('autoClimb');
+          return;
+        }
+
+        if (button.classList.contains('robot-start-option')) {
+          state.robotStartSide = button.dataset.value;
+          updateDisplay('robotStartSide');
           return;
         }
 
@@ -366,26 +398,61 @@
         if (!key) return;
 
         if (button.classList.contains('increment')) {
-          const increment = key === 'rough' ? 1 : 1;
-          state[key] = clampNumber(state[key] + increment, key);
+          state[key] = clampNumber(state[key] + 1, key);
         } else if (button.classList.contains('decrement')) {
-          const decrement = key === 'rough' ? 1 : 1;
-          state[key] = clampNumber(state[key] - decrement, key);
+          state[key] = clampNumber(state[key] - 1, key);
         }
 
         updateDisplay(key);
       });
 
+      function validateForm() {
+        const errors = [];
+
+        // Check text inputs
+        if (!state.name || state.name.trim() === '') {
+          errors.push('Your Name is required');
+        }
+        if (!state.teamNumber || state.teamNumber.trim() === '') {
+          errors.push('Team Number is required');
+        }
+        if (!state.matchNumber || state.matchNumber.trim() === '') {
+          errors.push('Match Number is required');
+        }
+
+        // Check selection fields
+        if (state.autoBallsScore === 'N/A') {
+          errors.push('Approx. Auto Balls Scored must be selected');
+        }
+        if (state.telepopBallsScore === 'N/A') {
+          errors.push('Approx. Teleop Balls Scored must be selected');
+        }
+        if (state.approxStorage === '0') {
+          errors.push('Storage capacity must be selected');
+        }
+
+        return errors;
+      }
+
       document.getElementById('submit-btn').addEventListener('click', () => {
+        const validationErrors = validateForm();
+        
+        if (validationErrors.length > 0) {
+          alert('Form is incomplete:\n\n' + validationErrors.join('\n'));
+          return;
+        }
+
         const scriptUrl = 'https://script.google.com/macros/s/AKfycbwELMK6enk3vwtbK0QfrG1EHVJ-N1YTmXW5fXCGzAkfzX_c_IQ107APv3nvwxNcc5Pc/exec';
         
         // Convert boolean values to Yes/No strings for sheets compatibility
         const dataToSubmit = {
           ...state,
-          trench: state.trench ? 'Yes' : 'No',
-          pickupFloor: state.pickupFloor ? 'Yes' : 'No',
-          pickupHuman: state.pickupHuman ? 'Yes' : 'No',
-          shoot: state.shoot ? 'Yes' : 'No'
+          trench: state.trench === 'N/A' ? 'N/A' : (state.trench ? 'Yes' : 'No'),
+          pickupFloor: state.pickupFloor === 'N/A' ? 'N/A' : (state.pickupFloor ? 'Yes' : 'No'),
+          pickupHuman: state.pickupHuman === 'N/A' ? 'N/A' : (state.pickupHuman ? 'Yes' : 'No'),
+          shoot: state.shoot === 'N/A' ? 'N/A' : (state.shoot ? 'Yes' : 'No'),
+          trenchUnder: state.trenchUnder === 'N/A' ? 'N/A' : (state.trenchUnder ? 'Yes' : 'No'),
+          robotOnField: state.robotOnField === 'N/A' ? 'N/A' : (state.robotOnField ? 'Yes' : 'No')
         };
         
         fetch(scriptUrl, {
@@ -399,19 +466,20 @@
           state.name = '';
           state.teamNumber = '';
           state.matchNumber = '';
+          state.robotOnField = true;
+          state.robotStartSide = 'B1';
           state.autoScore = 0;
           state.autoClimb = 'No';
-          state.autoBallsScore = '0';
+          state.autoBallsScore = 'N/A';
           state.balls = 0;
-          state.telepopBallsScore = '0';
-          state.rough = 0;
+          state.telepopBallsScore = 'N/A';
+          state.trenchUnder = false;
           state.approxMissedPercentage = '0';
           state.climb = 'No';
           state.trench = false;
           state.pickupFloor = false;
           state.pickupHuman = false;
           state.shoot = false;
-          state.storage = 0;
           state.approxStorage = '0';
           state.notes = '';
           // Update inputs
@@ -420,19 +488,20 @@
           document.getElementById('match-number').value = '';
           document.getElementById('notes').value = '';
           // Update displays
+          updateDisplay('robotOnField');
+          updateDisplay('robotStartSide');
           updateDisplay('autoScore');
           updateDisplay('autoClimb');
           updateDisplay('autoBallsScore');
           updateDisplay('balls');
           updateDisplay('telepopBallsScore');
-          updateDisplay('rough');
+          updateDisplay('trenchUnder');
           updateDisplay('approxMissedPercentage');
           updateDisplay('climb');
           updateDisplay('trench');
           updateDisplay('pickupFloor');
           updateDisplay('pickupHuman');
           updateDisplay('shoot');
-          updateDisplay('storage');
           updateDisplay('approxStorage');
         })
         .catch(error => {

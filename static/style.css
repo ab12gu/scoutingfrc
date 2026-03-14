@@ -60,6 +60,10 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.required-asterisk {
+  color: var(--frc-red);
+}
+
 .input-row {
   display: flex;
   align-items: center;
@@ -249,6 +253,17 @@ button.autoClimb-option[data-value="No"].active {
   border-color: var(--frc-red);
 }
 
+button.robot-start-option {
+  border-color: rgba(0, 87, 184, 0.35);
+  color: var(--frc-blue);
+}
+
+button.robot-start-option.active {
+  background: var(--frc-blue);
+  color: white;
+  border-color: var(--frc-blue);
+}
+
 button.score-range-option-auto,
 button.score-range-option-teleop,
 button.approx-storage-option {
@@ -277,6 +292,102 @@ button.approx-storage-option[data-value="0"].active {
   background: var(--frc-red);
   color: white;
   border-color: var(--frc-red);
+}
+
+button.score-range-option-auto[data-value="N/A"] {
+  border-color: rgba(88, 96, 108, 0.35);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+button.score-range-option-auto[data-value="N/A"].active {
+  background: var(--muted);
+  color: white;
+  border-color: var(--muted);
+}
+
+button.score-range-option-teleop[data-value="N/A"] {
+  border-color: rgba(88, 96, 108, 0.35);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+button.score-range-option-teleop[data-value="N/A"].active {
+  background: var(--muted);
+  color: white;
+  border-color: var(--muted);
+}
+
+button.toggle-option[data-value="N/A"] {
+  border-color: rgba(88, 96, 108, 0.35);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+button.toggle-option[data-value="N/A"].active {
+  background: var(--muted);
+  color: white;
+  border-color: var(--muted);
+}
+
+button.climb-option[data-value="N/A"] {
+  border-color: rgba(88, 96, 108, 0.35);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+button.climb-option[data-value="N/A"].active {
+  background: var(--muted);
+  color: white;
+  border-color: var(--muted);
+}
+
+button.autoClimb-option[data-value="N/A"] {
+  border-color: rgba(88, 96, 108, 0.35);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+button.autoClimb-option[data-value="N/A"].active {
+  background: var(--muted);
+  color: white;
+  border-color: var(--muted);
+}
+
+button.missed-percentage-option[data-value="N/A"] {
+  border-color: rgba(88, 96, 108, 0.35);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+button.missed-percentage-option[data-value="N/A"].active {
+  background: var(--muted);
+  color: white;
+  border-color: var(--muted);
+}
+
+button.robot-start-option[data-value="N/A"] {
+  border-color: rgba(88, 96, 108, 0.35);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+button.robot-start-option[data-value="N/A"].active {
+  background: var(--muted);
+  color: white;
+  border-color: var(--muted);
+}
+
+button.approx-storage-option[data-value="N/A"] {
+  border-color: rgba(88, 96, 108, 0.35);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+button.approx-storage-option[data-value="N/A"].active {
+  background: var(--muted);
+  color: white;
+  border-color: var(--muted);
 }
 
 input.toggle-checkbox {
