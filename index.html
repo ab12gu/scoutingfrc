@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FRC Scouting</title>
-    <link rel="stylesheet" href="/static/style.css?v=20">
+    <link rel="stylesheet" href="/static/style.css?v=21">
     <link rel="icon" type="image/x-icon" href="/static/images/scout-blue-skyblue.png">
   </head>
 
@@ -267,10 +267,20 @@
 
       document.getElementById('submit-btn').addEventListener('click', () => {
         const scriptUrl = 'https://script.google.com/macros/s/AKfycbwELMK6enk3vwtbK0QfrG1EHVJ-N1YTmXW5fXCGzAkfzX_c_IQ107APv3nvwxNcc5Pc/exec';
+        
+        // Convert boolean values to Yes/No strings for sheets compatibility
+        const dataToSubmit = {
+          ...state,
+          trench: state.trench ? 'Yes' : 'No',
+          pickupFloor: state.pickupFloor ? 'Yes' : 'No',
+          pickupHuman: state.pickupHuman ? 'Yes' : 'No',
+          shoot: state.shoot ? 'Yes' : 'No'
+        };
+        
         fetch(scriptUrl, {
           method: 'POST',
           mode: 'no-cors',
-          body: JSON.stringify(state)
+          body: JSON.stringify(dataToSubmit)
         })
         .then(() => {
           alert("Data submitted successfully!");
