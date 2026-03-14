@@ -231,14 +231,11 @@
         const scriptUrl = 'https://script.google.com/macros/s/AKfycbwELMK6enk3vwtbK0QfrG1EHVJ-N1YTmXW5fXCGzAkfzX_c_IQ107APv3nvwxNcc5Pc/exec';
         fetch(scriptUrl, {
           method: 'POST',
-          body: JSON.stringify(state),
-          headers: {
-            'Content-Type': 'application/json'
-          }
+          mode: 'no-cors',
+          body: JSON.stringify(state)
         })
-        .then(response => response.text())
-        .then(data => {
-          alert("submitted");
+        .then(() => {
+          alert("Data submitted successfully!");
           // Reset all parameters
           state.teamNumber = '';
           state.matchNumber = '';
