@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FRC Scouting</title>
-    <link rel="stylesheet" href="/static/style.css?v=24">
+    <link rel="stylesheet" href="/static/style.css?v=26">
     <link rel="icon" type="image/x-icon" href="/static/images/scout-blue-skyblue.png">
   </head>
 
@@ -32,11 +32,25 @@
       </div>
 
       <div class="poll">
-        <div class="poll-row">
+        <div class="poll-row">        
           <span class="poll-label">Balls scored in auto</span>
           <button type="button" class="decrement" data-key="autoScore">-</button>
           <input type="number" class="poll-input" id="autoScore-input" data-key="autoScore" value="0" min="0">
           <button type="button" class="increment" data-key="autoScore">+</button>
+        </div>
+
+        <div class="poll-row climb-row">
+          <span class="poll-label">Approx. Auto Balls Scored</span>
+          <div class="climb-buttons">
+            <button type="button" class="score-range-option-auto" data-value="0">0</button>
+            <button type="button" class="score-range-option-auto" data-value="1-25">1-25</button>
+            <button type="button" class="score-range-option-auto" data-value="25-50">25-50</button>
+            <button type="button" class="score-range-option-auto" data-value="50-75">50-75</button>
+            <button type="button" class="score-range-option-auto" data-value="75-100">75-100</button>
+            <button type="button" class="score-range-option-auto" data-value="100-200">100-200</button>
+            <button type="button" class="score-range-option-auto" data-value="200+">200+</button>
+          </div>
+          <span class="poll-value" id="autoBallsScore">0</span>
         </div>
 
         <div class="poll-row climb-row">
@@ -56,6 +70,20 @@
           <button type="button" class="decrement" data-key="balls">-</button>
           <input type="number" class="poll-input" id="balls-input" data-key="balls" value="0" min="0">
           <button type="button" class="increment" data-key="balls">+</button>
+        </div>
+
+        <div class="poll-row climb-row">
+          <span class="poll-label">Approx. Teleop Balls Scored</span>
+          <div class="climb-buttons">
+            <button type="button" class="score-range-option-teleop" data-value="0">0</button>
+            <button type="button" class="score-range-option-teleop" data-value="1-25">1-25</button>
+            <button type="button" class="score-range-option-teleop" data-value="25-50">25-50</button>
+            <button type="button" class="score-range-option-teleop" data-value="50-75">50-75</button>
+            <button type="button" class="score-range-option-teleop" data-value="75-100">75-100</button>
+            <button type="button" class="score-range-option-teleop" data-value="100-200">100-200</button>
+            <button type="button" class="score-range-option-teleop" data-value="200+">200+</button>
+          </div>
+          <span class="poll-value" id="telepopBallsScore">0</span>
         </div>
 
         <div class="poll-row">
@@ -134,7 +162,9 @@
         matchNumber: '',
         autoScore: 0,
         autoClimb: 'No',
+        autoBallsScore: '0',
         balls: 0,
+        telepopBallsScore: '0',
         rough: 0,
         climb: 'No',
         trench: false,
@@ -177,6 +207,24 @@
           document.querySelectorAll('.autoClimb-option').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.value === value);
           });
+        }
+        // Update auto balls score range button styles
+        if (key === 'autoBallsScore') {
+          document.querySelectorAll('.score-range-option-auto').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.value === value);
+          });
+          if (el) {
+            el.textContent = value;
+          }
+        }
+        // Update teleop balls score range button styles
+        if (key === 'telepopBallsScore') {
+          document.querySelectorAll('.score-range-option-teleop').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.value === value);
+          });
+          if (el) {
+            el.textContent = value;
+          }
         }
       }
 
@@ -251,6 +299,18 @@
           return;
         }
 
+        if (button.classList.contains('score-range-option-auto')) {
+          state.autoBallsScore = button.dataset.value;
+          updateDisplay('autoBallsScore');
+          return;
+        }
+
+        if (button.classList.contains('score-range-option-teleop')) {
+          state.telepopBallsScore = button.dataset.value;
+          updateDisplay('telepopBallsScore');
+          return;
+        }
+
         const key = button.dataset.key;
         if (!key) return;
 
@@ -290,7 +350,9 @@
           state.matchNumber = '';
           state.autoScore = 0;
           state.autoClimb = 'No';
+          state.autoBallsScore = '0';
           state.balls = 0;
+          state.telepopBallsScore = '0';
           state.rough = 0;
           state.climb = 'No';
           state.trench = false;
@@ -307,7 +369,9 @@
           // Update displays
           updateDisplay('autoScore');
           updateDisplay('autoClimb');
+          updateDisplay('autoBallsScore');
           updateDisplay('balls');
+          updateDisplay('telepopBallsScore');
           updateDisplay('rough');
           updateDisplay('climb');
           updateDisplay('trench');
