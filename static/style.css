@@ -419,6 +419,51 @@ button.score-range-option-teleop[data-value="N/A"].active {
   border-color: var(--muted);
 }
 
+button.teleop-balls-option {
+  border-color: rgba(0, 87, 184, 0.35);
+  color: var(--frc-blue);
+}
+
+button.teleop-balls-option[data-value="0"] {
+  border-color: rgba(237, 27, 36, 0.35);
+  color: var(--frc-red);
+}
+
+button.teleop-balls-option[data-value="150"] {
+  border-color: rgba(30, 132, 73, 0.35);
+  color: var(--frc-green);
+}
+
+button.teleop-balls-option.active {
+  background: var(--frc-blue);
+  color: white;
+  border-color: var(--frc-blue);
+}
+
+button.teleop-balls-option[data-value="0"].active {
+  background: var(--frc-red);
+  color: white;
+  border-color: var(--frc-red);
+}
+
+button.teleop-balls-option[data-value="150"].active {
+  background: var(--frc-green);
+  color: white;
+  border-color: var(--frc-green);
+}
+
+button.teleop-balls-option[data-value="N/A"] {
+  border-color: rgba(88, 96, 108, 0.35);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+button.teleop-balls-option[data-value="N/A"].active {
+  background: var(--muted);
+  color: white;
+  border-color: var(--muted);
+}
+
 button.toggle-option[data-value="N/A"] {
   border-color: rgba(88, 96, 108, 0.35);
   color: var(--muted);
@@ -455,13 +500,13 @@ button.autoClimb-option[data-value="N/A"].active {
   border-color: var(--muted);
 }
 
-button.missed-percentage-option[data-value="N/A"] {
+button.auto-balls-na-option {
   border-color: rgba(88, 96, 108, 0.35);
   color: var(--muted);
   white-space: nowrap;
 }
 
-button.missed-percentage-option[data-value="N/A"].active {
+button.auto-balls-na-option.active {
   background: var(--muted);
   color: white;
   border-color: var(--muted);
@@ -653,50 +698,6 @@ button.toggle-option[data-value="false"].active {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 2px rgba(0, 87, 184, 0.2);
-}
-
-button.missed-percentage-option {
-  border-color: rgba(0, 87, 184, 0.35);
-  color: var(--frc-blue);
-}
-
-button.missed-percentage-option[data-value="0"] {
-  border-color: rgba(30, 132, 73, 0.35);
-  color: var(--frc-green);
-}
-
-button.missed-percentage-option[data-value="100%"] {
-  border-color: rgba(237, 27, 36, 0.35);
-  color: var(--frc-red);
-}
-
-button.missed-percentage-option[data-value="150+"] {
-  border-color: rgba(237, 27, 36, 0.35);
-  color: var(--frc-red);
-}
-
-button.missed-percentage-option[data-value="150+"].active {
-  background: var(--frc-red);
-  color: white;
-  border-color: var(--frc-red);
-}
-
-button.missed-percentage-option.active {
-  background: var(--frc-blue);
-  color: white;
-  border-color: var(--frc-blue);
-}
-
-button.missed-percentage-option[data-value="0"].active {
-  background: var(--frc-green);
-  color: white;
-  border-color: var(--frc-green);
-}
-
-button.missed-percentage-option[data-value="100%"].active {
-  background: var(--frc-red);
-  color: white;
-  border-color: var(--frc-red);
 }
 
 .submit-section {

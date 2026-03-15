@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FRC Scouting</title>
-    <link rel="stylesheet" href="/static/style.css?v=49">
+    <link rel="stylesheet" href="/static/style.css?v=50">
     <link rel="icon" type="image/x-icon" href="/static/images/scout-blue-skyblue.png">
   </head>
 
@@ -55,15 +55,9 @@
         </div>
 
         <div class="poll-row climb-row">
-          <span class="poll-label">Auto Balls Scored <span class="required-asterisk">*</span></span>
-          <div class="climb-buttons">
-            <button type="button" class="score-range-option-auto" data-value="0">0</button>
-            <button type="button" class="score-range-option-auto" data-value="1-10">1-10</button>
-            <button type="button" class="score-range-option-auto" data-value="10-25">10-25</button>
-            <button type="button" class="score-range-option-auto" data-value="25-40">25-40</button>
-            <button type="button" class="score-range-option-auto" data-value="40+">40+</button>
-            <button type="button" class="score-range-option-auto" data-value="N/A">N/A</button>
-          </div>
+          <span class="poll-label">Auto Balls Scored (exact number) <span class="required-asterisk">*</span></span>
+          <input type="number" id="autoBallsScored" class="poll-input" placeholder="0" min="0" max="200">
+          <button type="button" class="auto-balls-na-option" data-value="N/A">N/A</button>
         </div>
 
         <div class="poll-row climb-row">
@@ -81,30 +75,23 @@
         <div class="poll-row climb-row">
           <span class="poll-label">Teleop Balls Scored <span class="required-asterisk">*</span></span>
           <div class="climb-buttons">
-            <button type="button" class="score-range-option-teleop" data-value="0">0</button>
-            <button type="button" class="score-range-option-teleop" data-value="1-25">1-25</button>
-            <button type="button" class="score-range-option-teleop" data-value="25-50">25-50</button>
-            <button type="button" class="score-range-option-teleop" data-value="50-75">50-75</button>
-            <button type="button" class="score-range-option-teleop" data-value="75-100">75-100</button>
-            <button type="button" class="score-range-option-teleop" data-value="100-125">100-125</button>
-            <button type="button" class="score-range-option-teleop" data-value="125-150">125-150</button>
-            <button type="button" class="score-range-option-teleop" data-value="150+">150+</button>
-            <button type="button" class="score-range-option-teleop" data-value="N/A">N/A</button>
-          </div>
-        </div>
-
-        <div class="poll-row climb-row">
-          <span class="poll-label">Balls missed <span class="required-asterisk">*</span></span>
-          <div class="climb-buttons">
-            <button type="button" class="missed-percentage-option" data-value="0">0</button>
-            <button type="button" class="missed-percentage-option" data-value="1-25">1-25</button>
-            <button type="button" class="missed-percentage-option" data-value="25-50">25-50</button>
-            <button type="button" class="missed-percentage-option" data-value="50-75">50-75</button>
-            <button type="button" class="missed-percentage-option" data-value="75-100">75-100</button>
-            <button type="button" class="missed-percentage-option" data-value="100-125">100-125</button>
-            <button type="button" class="missed-percentage-option" data-value="125-150">125-150</button>
-            <button type="button" class="missed-percentage-option" data-value="150+">150+</button>
-            <button type="button" class="missed-percentage-option" data-value="N/A">N/A</button>
+            <button type="button" class="teleop-balls-option" data-value="0">0</button>
+            <button type="button" class="teleop-balls-option" data-value="10">10</button>
+            <button type="button" class="teleop-balls-option" data-value="20">20</button>
+            <button type="button" class="teleop-balls-option" data-value="30">30</button>
+            <button type="button" class="teleop-balls-option" data-value="40">40</button>
+            <button type="button" class="teleop-balls-option" data-value="50">50</button>
+            <button type="button" class="teleop-balls-option" data-value="60">60</button>
+            <button type="button" class="teleop-balls-option" data-value="70">70</button>
+            <button type="button" class="teleop-balls-option" data-value="80">80</button>
+            <button type="button" class="teleop-balls-option" data-value="90">90</button>
+            <button type="button" class="teleop-balls-option" data-value="100">100</button>
+            <button type="button" class="teleop-balls-option" data-value="110">110</button>
+            <button type="button" class="teleop-balls-option" data-value="120">120</button>
+            <button type="button" class="teleop-balls-option" data-value="130">130</button>
+            <button type="button" class="teleop-balls-option" data-value="140">140</button>
+            <button type="button" class="teleop-balls-option" data-value="150">150</button>
+            <button type="button" class="teleop-balls-option" data-value="N/A">N/A</button>
           </div>
         </div>
 
@@ -182,10 +169,9 @@
         robotStartSide: 'B1',
         autoScore: 0,
         autoClimb: 'No',
-        autoBallsScore: 'N/A',
+        autoBallsScore: 0,
         balls: 0,
-        telepopBallsScore: 'N/A',
-        approxMissedPercentage: '0',
+        telepopBallsScore: 0,
         climb: 'No',
         trench: false,
         pickupFloor: false,
@@ -199,15 +185,9 @@
         const el = document.getElementById(key);
         const input = document.getElementById(key + '-input');
         const value = state[key];
-        if (typeof value === 'boolean' || value === 'N/A') {
-          if (el) {
-            if (value === 'N/A') {
-              el.textContent = 'N/A';
-            } else {
-              el.textContent = value ? 'Yes' : 'No';
-            }
-          }
-          // Update toggle option button styles
+        
+        // Update toggle option button styles (for all boolean fields)
+        if (key === 'robotOnField' || key === 'trench' || key === 'pickupFloor' || key === 'pickupHuman' || key === 'shoot') {
           document.querySelectorAll(`.toggle-option[data-key="${key}"]`).forEach(btn => {
             btn.classList.remove('active');
             if (value === 'N/A') {
@@ -220,6 +200,16 @@
               btn.classList.add('active');
             }
           });
+        }
+        
+        if (typeof value === 'boolean' || value === 'N/A') {
+          if (el) {
+            if (value === 'N/A') {
+              el.textContent = 'N/A';
+            } else {
+              el.textContent = value ? 'Yes' : 'No';
+            }
+          }
         } else {
           if (el) {
             el.textContent = value;
@@ -246,23 +236,23 @@
             btn.classList.toggle('active', btn.dataset.value === value);
           });
         }
-        // Update auto balls score range button styles
+        // Update auto balls score input and N/A button
         if (key === 'autoBallsScore') {
-          document.querySelectorAll('.score-range-option-auto').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.value === value);
-          });
-          if (el) {
-            el.textContent = value;
+          const input = document.getElementById('autoBallsScored');
+          const naBtn = document.querySelector('.auto-balls-na-option');
+          if (value === 'N/A') {
+            input.value = '';
+            naBtn.classList.add('active');
+          } else {
+            input.value = value;
+            naBtn.classList.remove('active');
           }
         }
-        // Update teleop balls score range button styles
+        // Update teleop balls score button styles
         if (key === 'telepopBallsScore') {
-          document.querySelectorAll('.score-range-option-teleop').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.value === value);
+          document.querySelectorAll('.teleop-balls-option').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.value === String(value));
           });
-          if (el) {
-            el.textContent = value;
-          }
         }
         // Update approx storage option button styles
         if (key === 'approxStorage') {
@@ -272,12 +262,6 @@
           if (el) {
             el.textContent = value;
           }
-        }
-        // Update approx missed percentage button styles
-        if (key === 'approxMissedPercentage') {
-          document.querySelectorAll('.missed-percentage-option').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.value === value);
-          });
         }
       }
 
@@ -299,6 +283,15 @@
 
       document.getElementById('notes').addEventListener('input', (e) => {
         state.notes = e.target.value;
+      });
+
+      document.getElementById('autoBallsScored').addEventListener('input', (e) => {
+        const value = e.target.value.trim();
+        if (value === '') {
+          state.autoBallsScore = 0;
+        } else {
+          state.autoBallsScore = Math.max(0, parseInt(value) || 0);
+        }
       });
 
       document.querySelectorAll('.poll-input').forEach(input => {
@@ -346,7 +339,6 @@
             state.autoBallsScore = 'N/A';
             state.autoClimb = 'N/A';
             state.telepopBallsScore = 'N/A';
-            state.approxMissedPercentage = 'N/A';
             state.climb = 'N/A';
             state.trench = 'N/A';
             state.pickupFloor = 'N/A';
@@ -358,13 +350,45 @@
             updateDisplay('autoBallsScore');
             updateDisplay('autoClimb');
             updateDisplay('telepopBallsScore');
-            updateDisplay('approxMissedPercentage');
+
             updateDisplay('climb');
             updateDisplay('trench');
             updateDisplay('pickupFloor');
             updateDisplay('pickupHuman');
             updateDisplay('shoot');
             updateDisplay('approxStorage');
+          } else if (key === 'robotOnField' && value === true) {
+            // If robot is on field, clear all selections
+            state.robotStartSide = '';
+            state.autoBallsScore = 0;
+            state.autoClimb = '';
+            state.telepopBallsScore = 0;
+            state.climb = '';
+            state.trench = '';
+            state.pickupFloor = '';
+            state.pickupHuman = '';
+            state.shoot = '';
+            state.approxStorage = '';
+            
+            updateDisplay('robotStartSide');
+            updateDisplay('autoBallsScore');
+            updateDisplay('autoClimb');
+            updateDisplay('telepopBallsScore');
+            updateDisplay('climb');
+            updateDisplay('trench');
+            updateDisplay('pickupFloor');
+            updateDisplay('pickupHuman');
+            updateDisplay('shoot');
+            updateDisplay('approxStorage');
+          }
+          return;
+        }
+
+        if (button.classList.contains('auto-balls-na-option')) {
+          if (button.dataset.value === 'N/A') {
+            state.autoBallsScore = 'N/A';
+            document.getElementById('autoBallsScored').value = '';
+            button.classList.add('active');
           }
           return;
         }
@@ -387,14 +411,12 @@
           return;
         }
 
-        if (button.classList.contains('score-range-option-auto')) {
-          state.autoBallsScore = button.dataset.value;
-          updateDisplay('autoBallsScore');
-          return;
-        }
-
-        if (button.classList.contains('score-range-option-teleop')) {
-          state.telepopBallsScore = button.dataset.value;
+        if (button.classList.contains('teleop-balls-option')) {
+          if (button.dataset.value === 'N/A') {
+            state.telepopBallsScore = 'N/A';
+          } else {
+            state.telepopBallsScore = parseInt(button.dataset.value) || 0;
+          }
           updateDisplay('telepopBallsScore');
           return;
         }
@@ -402,12 +424,6 @@
         if (button.classList.contains('approx-storage-option')) {
           state.approxStorage = button.dataset.value;
           updateDisplay('approxStorage');
-          return;
-        }
-
-        if (button.classList.contains('missed-percentage-option')) {
-          state.approxMissedPercentage = button.dataset.value;
-          updateDisplay('approxMissedPercentage');
           return;
         }
 
@@ -438,6 +454,10 @@
         }
 
         // Check selection fields
+        const autoBallsInput = document.getElementById('autoBallsScored').value.trim();
+        if (autoBallsInput === '' && state.autoBallsScore !== 'N/A') {
+          errors.push('Auto Balls Scored is required');
+        }
         if (state.approxStorage === '0') {
           errors.push('Storage capacity must be selected');
         }
@@ -475,7 +495,6 @@
           autoBallsScore: state.autoBallsScore,
           autoClimb: state.autoClimb,
           telepopBallsScore: state.telepopBallsScore,
-          approxMissedPercentage: state.approxMissedPercentage,
           climb: state.climb,
           trench: state.trench === 'N/A' ? 'N/A' : (state.trench ? 'Yes' : 'No'),
           pickupFloor: state.pickupFloor === 'N/A' ? 'N/A' : (state.pickupFloor ? 'Yes' : 'No'),
@@ -502,10 +521,9 @@
           state.robotOnField = true;
           state.autoScore = 0;
           state.autoClimb = 'No';
-          state.autoBallsScore = 'N/A';
+          state.autoBallsScore = 0;
           state.balls = 0;
-          state.telepopBallsScore = 'N/A';
-          state.approxMissedPercentage = '0';
+          state.telepopBallsScore = 0;
           state.climb = 'No';
           state.trench = false;
           state.pickupFloor = false;
@@ -515,6 +533,7 @@
           state.notes = '';
           // Update inputs (keeping name and incrementing match number)
           document.getElementById('team-number').value = '';
+          document.getElementById('autoBallsScored').value = '';
           document.getElementById('match-number').value = nextMatchNumber;
           document.getElementById('notes').value = '';
           // Update displays
@@ -525,7 +544,6 @@
           updateDisplay('autoBallsScore');
           updateDisplay('balls');
           updateDisplay('telepopBallsScore');
-          updateDisplay('approxMissedPercentage');
           updateDisplay('climb');
           updateDisplay('trench');
           updateDisplay('pickupFloor');
