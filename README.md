@@ -58,7 +58,7 @@ Libraries/structure:
 
 Hosting websites
 - Hosting Platform: [Render](https://render.com)
-- [https://render.com/docs/deploy-django](https://render.com/docs/deploy-django)
+  - [https://render.com/docs/deploy-django](https://render.com/docs/deploy-django)
 - DB Host: `Subabase`
 
 ## Requirements
