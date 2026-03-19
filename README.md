@@ -19,6 +19,12 @@ Defined by Gavin
 9. Shoot on move
 10. Storage capacity
 
+## Google Sheets
+
+The data is outputted into a Google Sheets, which makes it easier to human-analyze and syncs w/ google survey's output. If needed, we rely on google survey's to gather data. 
+
+To connect the google sheets, you need to add a script to: [https://script.google.com/](https://script.google.com/).
+
 ## Installation
 
 Used to use `pip` as package manager, moved to `uv` <br>
