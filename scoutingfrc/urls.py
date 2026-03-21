@@ -28,5 +28,5 @@ urlpatterns = [
     path('', home),
     path("polls/", include("polls.urls")),
     path('admin/', admin.site.urls),
-
+    path('about/', lambda r: HttpResponse("This is the About page.")),  # Simple about page
 ]

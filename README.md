@@ -4,6 +4,24 @@ Scouting app for frc
 
 Domain Address: [scoutingfrc.com](https://www.scoutingfrc.com)
 
+## Architecture
+
+Languages:
+- Frontend: `HTML/CSS`
+- Backend: `Python`
+- DB: `SQL`
+
+Libraries/structure: 
+- Web Framework: `Django`
+- Backend DB: `Postgresql`
+
+Hosting websites
+- Hosting Platform: [Render](https://render.com)
+  - [https://render.com/docs/deploy-django](https://render.com/docs/deploy-django)
+- DB Host: `Subabase`
+
+NOTE: I don't have a [build script](https://render.com/docs/deploy-django#create-a-build-script) in github for render and just define them within render UI. 
+
 ## Google Sheets
 
 The data is outputted into a Google Sheets, which makes it easier to human-analyze and syncs w/ google survey's output. If needed, we rely on google survey's to gather data. 
@@ -44,22 +62,6 @@ Local deploy, run:
 ```
 $ python manage.py runserver <port number>
 ```
-
-## Architecture
-
-Languages:
-- Frontend: `HTML/CSS`
-- Backend: `Python`
-- DB: `SQL`
-
-Libraries/structure: 
-- Web Framework: `Django`
-- Backend DB: `Postgresql`
-
-Hosting websites
-- Hosting Platform: [Render](https://render.com)
-  - [https://render.com/docs/deploy-django](https://render.com/docs/deploy-django)
-- DB Host: `Subabase`
 
 ## Requirements
 
