@@ -120,6 +120,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+## Directory Structure
+# Generally define teh docs related to each page in subfolder: polls/static/polls/example.jpg
+# But we are doing a global static for ease
+
 # This production code might break development mode, so we check whether we're in DEBUG mode
 if not DEBUG:
     # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
