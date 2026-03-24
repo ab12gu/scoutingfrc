@@ -25,7 +25,8 @@ def home(request):
     #return HttpResponse("Welcome to Scout FRC!")
 
 urlpatterns = [
-    path('', home),
+    path('', include("homepage.urls")),
+    #path('', home),
     path("polls/", include("polls.urls")),
     path('admin/', admin.site.urls),
     path('about/', lambda r: HttpResponse("This is the About page.")),  # Simple about page

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'scoutingfrc.com', 'www.scoutingfrc.c
 
 # Application definition
 INSTALLED_APPS = [
+    "homepage.apps.HomepageConfig",
     "polls.apps.PollsConfig",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -81,6 +82,8 @@ DATABASES = {
     )
 }
 
+
+
 # Used for local development (won't work in render)
 #DATABASES = {
 #    'default': { 
@@ -119,6 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static'] ## Not in docs but needed to render css in local?
 
 ## Directory Structure
 # Generally define teh docs related to each page in subfolder: polls/static/polls/example.jpg
